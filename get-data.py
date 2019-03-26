@@ -20,4 +20,6 @@ pwid = data['PetalWidth']
 
 print(slen)
 # Plot them.
+plt.hist(slen)
+plt.show()
 
