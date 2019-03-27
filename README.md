@@ -28,3 +28,8 @@ Fisher's (or Anderson's) iris data set gives the measurements in centimetres of 
 4. MathWorks: https://uk.mathworks.com/help/stats/examples/classification.html
 5. Wolfram Data Repository: https://datarepository.wolframcloud.com/resources/Sample-Data-Fishers-Irises
 6. Iris data set: https://github.com/pandas-dev/pandas/blob/master/pandas/tests/data/iris.csv
+7. pandas Python data analysis library: https://pandas.pydata.org/
+8. matplotlib Python 2D plotting library: https://matplotlib.org/
+9. Info. on pandas DataFrames: https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/
+10. 
+
