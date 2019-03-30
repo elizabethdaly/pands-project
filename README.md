@@ -36,7 +36,7 @@ I then plot the data columns as seperate data series on a single plot using **ma
 * plt.show() to display it.
 
  SepalLength | SepalWidth | PetalLength | PetalWidth | Name
- ----------------------------------------------------------
+ ------------|------------|-------------|------------|-----
 5.1 | 3.5 | 1.4 | 0.2 | Iris-setosa
 4.9 | 3.0 | 1.4 | 0.2 | Iris-setosa
 4.7 | 3.2 | 1.3 | 0.2 | Iris-setosa
