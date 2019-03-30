@@ -38,8 +38,8 @@ The column labels are SepalLength, SepalWidth, PetalLength, and PetalWidth all o
 
 The descriptive statistics are as follows:
 
- |SepalLength | SepalWidth | PetalLength | PetalWidth
--|----------|------------|-------------|-------------
+Property |SepalLength | SepalWidth | PetalLength | PetalWidth
+---------|------------|------------|-------------|-----------
 count | 150.000000 |150.000000 | 150.000000 | 150.000000
 mean | 5.843333 | 3.054000 | 3.758667 | 1.198667
 std | 0.828066 | 0.433594 | 1.764420 | 0.763161
