@@ -11,6 +11,9 @@ import pandas as pd
 # Import matplotlib for 2D plotting.
 import matplotlib.pyplot as plt
 
+# Import Numpy
+import numpy as np
+
 # Read the iris.csv file from this directory.
 # The result is a DataFrame, the basic data format for Pandas.
 data = pd.read_csv('iris.csv')
@@ -36,12 +39,42 @@ col_labels = data.columns
 print("Data column labels: ", col_labels)
 
 # Use decsribe() to get some basic statistics about each column of the data.
-# It would probably make more sense to get this information for each species.
+# It would make more sense to get this information for each species, but 
+# I'll start with this.
 print(data[col_labels[0]].describe())
 print(data[col_labels[1]].describe())
 print(data[col_labels[2]].describe())
 print(data[col_labels[3]].describe())
 print(data[col_labels[4]].describe())
+
+# Try some plotting.
+# I want each column as a line
+
+ax = plt.gca()
+
+data[col_labels[0]].plot(kind='line', y= 'SepalLength', ax=ax)
+data[col_labels[1]].plot(kind='line', y= 'SepalWidth', color='green', ax=ax)
+data[col_labels[2]].plot(kind='line', y= 'PetalLength', color='red', ax=ax)
+data[col_labels[3]].plot(kind='line', y= 'PetalWidth', color='yellow', ax=ax)
+
+x = np.arange(0, 150, 25)
+plt.xticks(x)
+
+plt.ylabel('cm', fontsize=16)
+plt.xlabel('sample', fontsize=16)
+
+plt.title("Overview of the Iris Data Set", fontsize=18)
+
+plt.legend(loc='best', fontsize=12)
+
+plt.grid()
+
+# Save the figure.
+plt.savefig('Overview.jpeg')
+
+plt.show()
+
+
 
 # Select each column according to its index.
 # The result is a Series.
@@ -58,10 +91,7 @@ print("col3: ", col_labels[2])
 print("col4: ", col_labels[3])
 print("col5: ", col_labels[4])
 
-# Try some plotting.
-# want each column as a line
-data[col_labels[0]].plot(kind='line')
-plt.show()
+
 quit()
 
 plt.hist(slen)
