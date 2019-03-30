@@ -17,9 +17,31 @@ Fisher introduced the iris flower data set and the linear discriminent analysis 
 Fisher's (or Anderson's) iris data set gives the measurements in centimetres of the variables sepal length, sepal width, petal length, and petal width (in that order) for 50 flowers from each of three species of iris. The species are _Iris setosa_, _Iris versicolor_, and _Iris virginica_. The data set consists of 150 rows or observations (50 samples from each species) by five columns. The first four columns contain the samples/measurements and the fifth contains the species name (or class). I obtained the data set as a csv file from GitHub as detailed below.
 
 ## Analysis
+The Python script **get-data.py** reads the csv file containing the data set and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
+* .head() to look at the first few lines.
+* .dtypes to find the data types of each column.
+* .shape to find the (number of rows, number of columns) in the dataframe.
+* .columns to find the labels of each column.
 
-The Python script *get-data.py* reads the csv file into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is compatible with the Iris Data Set we are investigating for this project. I use various Pandas functions to find out what the column names are and what the data types of each column are. 
 
+
+I then plot the data columns as seperate data series on a single plot using **matplotlib**. I'll explain them here the first time I use them.
+* plt.xlim() to set x axis range.
+* plt.xticks() to place tick marks on x axis according to a **NumPy** .arange() command.
+* plt.gca() keeps track of the axes so that the columns can be plotted on the same graph.
+* plt.title(), plt.ylabel(), and plt.xlabel() set up the graph titles and x and y axes labels.
+* plt.legend() to add a legend and place it in 'best' location.
+* plt.grid() to add gridlines.
+* plt.davefig() to save the figure.
+* plt.show() to display it.
+
+ SepalLength | SepalWidth | PetalLength | PetalWidth | Name
+ ----------------------------------------------------------
+5.1 | 3.5 | 1.4 | 0.2 | Iris-setosa
+4.9 | 3.0 | 1.4 | 0.2 | Iris-setosa
+4.7 | 3.2 | 1.3 | 0.2 | Iris-setosa
+4.6 | 3.1 | 1.5 | 0.2 | Iris-setosa
+5.0 | 3.6 | 1.4 | 0.2 | Iris-setosa
 
 ## Conclusion
 
