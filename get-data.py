@@ -1,7 +1,7 @@
 # Elizabeth Daly
 # HDip Data Analytics 2019 pands-project
 # 
-# Script to read in the iris data set.
+# Script to read in & analyse the iris data set.
 #
 # ###########################################################
 #
@@ -18,8 +18,8 @@ import numpy as np
 # The result is a DataFrame, the basic data format for Pandas.
 data = pd.read_csv('iris.csv')
 
-# Look at various attributes of the data to get an idea of its structure.
 # ###########################################################
+# Look at various attributes of the data to get an idea of its structure.
 
 # Print the first few lines.
 print(data.head())
@@ -38,35 +38,32 @@ print("Data index: ", data.index)
 col_labels = data.columns
 print("Data column labels: ", col_labels)
 
-# Use decsribe() to get some basic statistics about each column of the data.
-# It would make more sense to get this information for each species, but 
-# I'll start with this.
-print(data[col_labels[0]].describe())
-print(data[col_labels[1]].describe())
-print(data[col_labels[2]].describe())
-print(data[col_labels[3]].describe())
-print(data[col_labels[4]].describe())
+# ###########################################################
+# Try some plotting. I want each column as a line.
 
-# Try some plotting.
-# I want each column as a line
-
+# Keep track of axes so they can be used again.
 ax = plt.gca()
 
+# Plot each column of the data set as a different colour.
 data[col_labels[0]].plot(kind='line', y= 'SepalLength', ax=ax)
 data[col_labels[1]].plot(kind='line', y= 'SepalWidth', color='green', ax=ax)
 data[col_labels[2]].plot(kind='line', y= 'PetalLength', color='red', ax=ax)
 data[col_labels[3]].plot(kind='line', y= 'PetalWidth', color='yellow', ax=ax)
 
+# Set x range. 
+plt.xlim(0, 150)
+
+# Set the x tick marks.
 x = np.arange(0, 150, 25)
 plt.xticks(x)
 
+# Graph, x-axis, and y-axis titles.
+plt.title("Overview of the Iris Data Set", fontsize=18)
 plt.ylabel('cm', fontsize=16)
 plt.xlabel('sample', fontsize=16)
 
-plt.title("Overview of the Iris Data Set", fontsize=18)
-
-plt.legend(loc='best', fontsize=12)
-
+# Graph legend and grid
+plt.legend(loc='best', fontsize=10)
 plt.grid()
 
 # Save the figure.
@@ -74,7 +71,19 @@ plt.savefig('Overview.jpeg')
 
 plt.show()
 
+# ###########################################################
+# Use describe() to get some basic statistics about each column.
+# It would make more sense to get this information for each species,
+# but I'll start with this.
 
+# print(data[col_labels[0]].describe())
+# print(data[col_labels[1]].describe())
+# print(data[col_labels[2]].describe())
+# print(data[col_labels[3]].describe())
+# print(data[col_labels[4]].describe())
+
+# Or do all the numeric columns.
+print(data.describe())
 
 # Select each column according to its index.
 # The result is a Series.
@@ -82,7 +91,7 @@ slen = data[col_labels[0]]      # col 1
 swid = data[col_labels[1]]      # col 2
 plen = data[col_labels[2]]      # col 3
 pwid = data[col_labels[3]]      # col 4
-species = data[col_labels[3]]   # col 4
+species = data[col_labels[3]]   # col 5
 
 # These are the column headings.
 print("col1: ", col_labels[0])
@@ -91,9 +100,9 @@ print("col3: ", col_labels[2])
 print("col4: ", col_labels[3])
 print("col5: ", col_labels[4])
 
-
 quit()
-
-plt.hist(slen)
+# ###########################################################
+# Start looking at statistics per species.
+data.groupby('Name')['SepalLength'].mean().plot(kind='bar')
 plt.show()
 
