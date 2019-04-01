@@ -9,7 +9,7 @@ https://github.com/elizabethdaly/pands-project.git
 # The Fisher Iris Data Set
 
 ## Introduction
-Sir Ronald Fisher (1890-1962) was a British statistician and biologist who is best known for his work in the application of statistics to the design of scientific experiments. Following undergraduate study in mathematics at the University of Cambridge, he remained there for postgraduate work in physics, including the theory of errors. He continued his research in statistics over the next few years while working in various jobs - insurance company ststistician and teacher. In 1919 he became the statistician at the Rothamsted Experimental Station in Hertfordshire,where he had access to huge amounts of agricultural data. Here, he developed and applied statistical methods to the design of plant breeding experiments in order to get maximum useful information from the experiments while minimizing time, effort, and money. He held academic positions at University College London and Cambridge University before retiring to Australia, where he died in 1962. During his career he published many articles and books on various topics in statistics and genetics, including the method of maximum likelihood estimation and the analysis of variance.
+Sir Ronald Fisher (1890-1962) was a British statistician and biologist who is best known for his work in the application of statistics to the design of scientific experiments. Following undergraduate study in mathematics at the University of Cambridge, he remained there for postgraduate work in physics, including the theory of errors. He continued his research in statistics over the next few years while working in various jobs - insurance company ststistician and teacher. In 1919 he became the statistician at the Rothamsted Experimental Station in Hertfordshire, where he had access to huge amounts of agricultural data. Here, he developed and applied statistical methods to the design of plant breeding experiments in order to get maximum useful information from the experiments while minimizing time, effort, and money. He held academic positions at University College London and Cambridge University before retiring to Australia, where he died in 1962. During his career he published many articles and books on various topics in statistics and genetics, including the method of maximum likelihood estimation and the analysis of variance.
 
 Fisher introduced the iris flower data set and the linear discriminent analysis (LDA) in a 1936 publication. LDA is a method to reduce the number of dimensions in data sets in order to perform pattern classification or machine learning. As the MathWorks reference below states, if one has a data set containing observations with measurements on many variables and their known classes, could this data be used to determne which class measurements from new  observations are most likely to belong to? It seems to be a popular data set for demonstrating how to perform classification and for providing training sets in machine learning (see Wolfram reference below).  
 
@@ -18,9 +18,9 @@ Fisher's (or Anderson's) iris data set gives the measurements in centimetres of 
 
 ## Analysis
 The Python script **get-data.py** reads the csv file containing the data set and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
-* .head() to look at the first few lines.
+* .head() to look at the first few lines of the data set.
 * .dtypes to find the data types of each column.
-* .shape to find the (number of rows, number of columns) in the dataframe.
+* .shape to find the number of rows and columns in the dataframe.
 * .columns to find the labels of each column.
 * .describe() to generate some descriptive statistics for each column of numeric data. The output of describe() is another dataframe.
 
@@ -49,17 +49,21 @@ min | 4.300000 | 2.000000 | 1.000000 | 0.100000
 75% | 6.400000 | 3.300000 | 5.100000 | 1.800000
 max | 7.900000 | 4.400000 | 6.900000 | 2.500000
 
-I then plot the data columns as seperate data series on a single plot using **matplotlib**. I'll explain the commands here the first time I use them.
+Here, count is the number of observations, mean is the mean of the values, std is the standard deviation, and min (max) is the minimum (maximum) of the values. The standard deviation indicates the amount of spread in the values; if it is large then the values are spread over a wide range, while a small standard deviation means that the values are more tightly clustered around the mean. A quick glance at the table of results above shows that the values of SepalLength and  SepalWidth seem to cluster around the mean while the values of PetalLength and PetalWidth have a very large spread in values. 25%, 50%, and 75% are the 25th,50th, and 75th percentiles respectively. The 50th percentile is equivalent to the median value of the observations. The 50% value is close to the mean for SepalWidth and SepalLength but not so for PetalLength and PetalWidth. Bear in mind that these summary statistics apply to all 150 observations rather than to each species (set of 50 observations).
+
+I then plot the data columns as seperate data series on a single plot using **matplotlib**. I explain the commands here the first time I use them.
 * plt.xlim() to set x axis range.
-* plt.xticks() to place tick marks on x axis according to a **NumPy** .arange() command.
-* plt.gca() keeps track of the axes so that the columns can be plotted on the same graph.
+* plt.xticks() to place tick marks on the x axis in positions defined by a **NumPy** .arange() command.
+* plt.gca() keeps track of the axes so that many columns (or data series) can be plotted on the same graph.
 * plt.title(), plt.ylabel(), and plt.xlabel() set up the graph titles and x and y axes labels.
-* plt.legend() to add a legend and place it in 'best' location.
+* plt.legend() to add a legend and place it in the 'best' location given the shape of the curves.
 * plt.grid() to add gridlines.
 * plt.savefig() to save the figure.
 * plt.show() to display it.
 
 ![Data overview](Overview.jpeg)
+
+The jumps in observation values from species to species are very obvious in this figure, apart from in the case of SepalWidth (green curve). I think it would be more instuctive to analyse the observations applying to each specis seperately.
 
 ## Conclusion
 
