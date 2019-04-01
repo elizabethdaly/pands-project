@@ -24,7 +24,7 @@ data = pd.read_csv('iris.csv')
 # Print the first few lines.
 print(data.head())
 
-# What are the data types of each columns?
+# What are the data types of each column?
 print(data.dtypes)
 
 # What is the number of rows, columns in the data set?
@@ -67,7 +67,7 @@ plt.legend(loc='best', fontsize=10)
 plt.grid()
 
 # Save the figure.
-plt.savefig('Overview.jpeg')
+# plt.savefig('Overview.jpeg')
 
 plt.show()
 
@@ -82,9 +82,23 @@ plt.show()
 # print(data[col_labels[3]].describe())
 # print(data[col_labels[4]].describe())
 
-# Or do all the numeric columns.
-print(data.describe())
+# Or do all the numeric columns together, the output is another dataframe.
+data_summary = data.describe()
+print(data_summary)
 
+# Plot these summary statistics.
+# Almost ok except I don't want count
+# data_summary.plot.bar()
+
+# This omits count by selecting all but first row of summary dataframe.
+data_summary.iloc[1:7,0:3].plot.bar()
+plt.show()
+
+quit()
+data_summary.plot(kind='bar', y= 'SepalLength')
+plt.show()
+
+quit()
 # Select each column according to its index.
 # The result is a Series.
 slen = data[col_labels[0]]      # col 1
@@ -100,9 +114,11 @@ print("col3: ", col_labels[2])
 print("col4: ", col_labels[3])
 print("col5: ", col_labels[4])
 
-quit()
+
 # ###########################################################
 # Start looking at statistics per species.
+#ax1 = plt.gca()
 data.groupby('Name')['SepalLength'].mean().plot(kind='bar')
+#data.groupby('Name')['SepalLength'].std().plot(kind='bar', ax=ax1)
 plt.show()
 
