@@ -36,21 +36,6 @@ SepalLength | SepalWidth | PetalLength | PetalWidth | Name
 
 The column labels are SepalLength, SepalWidth, PetalLength, and PetalWidth all of type float64. The fifth column label is Name of type object (or string); it holds the name of the species. The dataframe size is 150 rows x 5 columns.
 
-The descriptive statistics are as follows:
-
-Property |SepalLength | SepalWidth | PetalLength | PetalWidth
----------|------------|------------|-------------|-----------
-count | 150.000000 |150.000000 | 150.000000 | 150.000000
-mean | 5.843333 | 3.054000 | 3.758667 | 1.198667
-std | 0.828066 | 0.433594 | 1.764420 | 0.763161
-min | 4.300000 | 2.000000 | 1.000000 | 0.100000
-25% | 5.100000 | 2.800000 | 1.600000 | 0.300000
-50% | 5.800000 | 3.000000 | 4.350000 | 1.300000
-75% | 6.400000 | 3.300000 | 5.100000 | 1.800000
-max | 7.900000 | 4.400000 | 6.900000 | 2.500000
-
-Here, count is the number of observations, mean is the mean of the values, std is the standard deviation, and min (max) is the minimum (maximum) of the values. The standard deviation indicates the amount of spread in the values; if it is large then the values are spread over a wide range, while a small standard deviation means that the values are more tightly clustered around the mean. A quick glance at the table of results above shows that the values of SepalLength and  SepalWidth seem to cluster around the mean while the values of PetalLength and PetalWidth have a very large spread in values. 25%, 50%, and 75% are the 25th,50th, and 75th percentiles respectively. The 50th percentile is equivalent to the median value of the observations. The 50% value is close to the mean for SepalWidth and SepalLength but not so for PetalLength and PetalWidth. Bear in mind that these summary statistics apply to all 150 observations rather than to each species (set of 50 observations).
-
 I then plot the data columns as seperate data series on a single plot using **matplotlib**. I explain the commands here the first time I use them.
 * plt.xlim() to set x axis range.
 * plt.xticks() to place tick marks on the x axis in positions defined by a **NumPy** .arange() command.
@@ -64,6 +49,23 @@ I then plot the data columns as seperate data series on a single plot using **ma
 ![Data overview](Overview.jpeg)
 
 The jumps in observation values from species to species are very obvious in this figure, apart from in the case of SepalWidth (green curve). I think it would be more instuctive to analyse the observations applying to each specis seperately.
+
+The descriptive statistics are as follows:
+
+Property |SepalLength | SepalWidth | PetalLength | PetalWidth
+---------|------------|------------|-------------|-----------
+count | 150.000000 |150.000000 | 150.000000 | 150.000000
+mean | 5.843333 | 3.054000 | 3.758667 | 1.198667
+std | 0.828066 | 0.433594 | 1.764420 | 0.763161
+min | 4.300000 | 2.000000 | 1.000000 | 0.100000
+25% | 5.100000 | 2.800000 | 1.600000 | 0.300000
+50% | 5.800000 | 3.000000 | 4.350000 | 1.300000
+75% | 6.400000 | 3.300000 | 5.100000 | 1.800000
+max | 7.900000 | 4.400000 | 6.900000 | 2.500000
+
+Here, count is the number of observations, mean is the mean of the values, std is the standard deviation, and min (max) is the minimum (maximum) of the values. The standard deviation indicates the amount of spread in the values; if it is large then the values are spread over a wide range, while a small standard deviation means that the values are more tightly clustered around the mean. A quick glance at the table of results above shows that the values of SepalLength and  SepalWidth seem to cluster around the mean while the values of PetalLength and PetalWidth have a very large spread in values. 25%, 50%, and 75% are the 25th, 50th, and 75th percentiles respectively. The 50th percentile is equivalent to the median value of the observations. The 50% value is close to the mean for SepalWidth and SepalLength but not so for PetalLength and PetalWidth. Bear in mind that these summary statistics apply to all 150 observations rather than to each species (set of 50 observations).
+
+![Summary statistics all species](SummaryStats.jpeg)
 
 ## Conclusion
 
