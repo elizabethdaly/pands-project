@@ -38,6 +38,13 @@ print("Data index: ", data.index)
 col_labels = data.columns
 print("Data column labels: ", col_labels)
 
+# These are the column headings.
+print("col1: ", col_labels[0])
+print("col2: ", col_labels[1])
+print("col3: ", col_labels[2])
+print("col4: ", col_labels[3])
+print("col5: ", col_labels[4])
+
 # ###########################################################
 # Try some plotting. I want each column as a line.
 
@@ -86,19 +93,30 @@ plt.show()
 data_summary = data.describe()
 print(data_summary)
 
-# Plot these summary statistics.
-# Almost ok except I don't want count
-# data_summary.plot.bar()
+# ###########################################################
+# Plot these summary statistics as a bar chart.
 
-# This omits count by selecting all but first row of summary dataframe.
-data_summary.iloc[1:7,0:3].plot.bar()
+# Omits count column by selecting all but first row of summary statistics dataframe.
+data_summary.iloc[1:8,0:4].plot.bar()
+
+# Set up graph properties.
+plt.title("Summary statistics: all species", fontsize=18)
+plt.ylabel('cm', fontsize=16)
+plt.legend(loc='best', fontsize=10)
+plt.grid()
+
+# Save the figure.
+plt.savefig('SummaryStats.jpeg')
+
 plt.show()
 
 quit()
-data_summary.plot(kind='bar', y= 'SepalLength')
-plt.show()
+#data_summary.plot(kind='bar', y= 'SepalLength')
+#plt.show()
 
-quit()
+# ###########################################################
+# Start looking at statistics per species.
+
 # Select each column according to its index.
 # The result is a Series.
 slen = data[col_labels[0]]      # col 1
@@ -107,16 +125,6 @@ plen = data[col_labels[2]]      # col 3
 pwid = data[col_labels[3]]      # col 4
 species = data[col_labels[3]]   # col 5
 
-# These are the column headings.
-print("col1: ", col_labels[0])
-print("col2: ", col_labels[1])
-print("col3: ", col_labels[2])
-print("col4: ", col_labels[3])
-print("col5: ", col_labels[4])
-
-
-# ###########################################################
-# Start looking at statistics per species.
 #ax1 = plt.gca()
 data.groupby('Name')['SepalLength'].mean().plot(kind='bar')
 #data.groupby('Name')['SepalLength'].std().plot(kind='bar', ax=ax1)
