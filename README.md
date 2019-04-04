@@ -13,10 +13,13 @@ Sir Ronald Fisher (1890-1962) was a British statistician and biologist who is be
 
 Fisher introduced the iris flower data set and the linear discriminent analysis (LDA) in a 1936 publication. LDA is a method to reduce the number of dimensions in data sets in order to perform pattern classification or machine learning. As the MathWorks reference below states, if one has a data set containing observations with measurements on many variables and their known classes, could this data be used to determne which class measurements from new  observations are most likely to belong to? It seems to be a popular data set for demonstrating how to perform classification and for providing training sets in machine learning (see Wolfram reference below).  
 
-### Description of the data set
+## Exploratory data analysis
+When starting this project I often encountered the term "Exploratory Data Analysis" (EDA). I found a good definition on the towardsdatascience website: Exploratory Data Analysis refers to the critical process of performing initial investigations on data so as to discover patterns,to spot anomalies,to test hypothesis and to check assumptions with the help of summary statistics and graphical representations. For this project, we are performing EDA on the Iris data set. 
+
+## Description of the data set
 Fisher's (or Anderson's) iris data set gives the measurements in centimetres of the variables sepal length, sepal width, petal length, and petal width (in that order) for 50 flowers from each of three species of iris. The species are _Iris setosa_, _Iris versicolor_, and _Iris virginica_. The data set consists of 150 rows or observations (50 samples from each species) by five columns. The first four columns contain the samples/measurements and the fifth contains the species name (or class). I obtained the data set as a csv file from GitHub as detailed below.
 
-## Analysis
+## Initial analysis
 The Python script **get-data.py** reads the csv file containing the data set and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
 * .head() to look at the first few lines of the data set.
 * .dtypes to find the data types of each column.
@@ -36,6 +39,8 @@ SepalLength | SepalWidth | PetalLength | PetalWidth | Name
 
 The column labels are SepalLength, SepalWidth, PetalLength, and PetalWidth all of type float64. The fifth column label is Name of type object (or string); it holds the name of the species. The dataframe size is 150 rows x 5 columns.
 
+### Plotting the full data set
+
 I then plot the data columns as seperate data series on a single plot using **matplotlib**. I explain the commands here the first time I use them.
 * plt.xlim() to set x axis range.
 * plt.xticks() to place tick marks on the x axis in positions defined by a **NumPy** .arange() command.
@@ -48,9 +53,11 @@ I then plot the data columns as seperate data series on a single plot using **ma
 
 ![Data overview](Overview.jpeg)
 
-The jumps in observation values from species to species are very obvious in this figure, apart from in the case of SepalWidth (green curve). I think it would be more instuctive to analyse the observations applying to each specis seperately.
+The jumps in observation values from species to species are very obvious in this figure, apart from in the case of SepalWidth (green curve). For that reason, I think it would be more instuctive to analyse the observations applying to each species seperately.
 
-The descriptive statistics are as follows:
+### Descriptive statistics
+
+The descriptive statistics of the full data set is as follows:
 
 Property |SepalLength | SepalWidth | PetalLength | PetalWidth
 ---------|------------|------------|-------------|-----------
@@ -67,17 +74,20 @@ Here, count is the number of observations, mean is the mean of the values, std i
 
 ![Summary statistics all species](SummaryStats.jpeg)
 
+## Further analysis
+
 ## Conclusion
 
 **References**
 1. Sir Ronald Fisher: https://www.britannica.com/biography/Ronald-Aylmer-Fisher 
 2. Sir Ronald Fisher: https://study.com/academy/lesson/sir-ronald-fisher-biography-contributions-to-statistics.html
 3. Linear Discriminant Analysis: https://sebastianraschka.com/Articles/2014_python_lda.html
-4. MathWorks: https://uk.mathworks.com/help/stats/examples/classification.html
-5. Wolfram Data Repository: https://datarepository.wolframcloud.com/resources/Sample-Data-Fishers-Irises
-6. Iris data set: https://github.com/pandas-dev/pandas/blob/master/pandas/tests/data/iris.csv
-7. pandas Python data analysis library: https://pandas.pydata.org/
-8. matplotlib Python 2D plotting library: https://matplotlib.org/
-9. Pandas DataFrames: https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/
-10. Plotting examples: http://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
+4. Exploratory Data Analysis: https://towardsdatascience.com/exploratory-data-analysis-8fc1cb20fd15
+5. MathWorks: https://uk.mathworks.com/help/stats/examples/classification.html
+6. Wolfram Data Repository: https://datarepository.wolframcloud.com/resources/Sample-Data-Fishers-Irises
+7. Iris data set: https://github.com/pandas-dev/pandas/blob/master/pandas/tests/data/iris.csv
+8. pandas Python data analysis library: https://pandas.pydata.org/
+9. matplotlib Python 2D plotting library: https://matplotlib.org/
+10. Pandas DataFrames: https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/
+11. Plotting examples: http://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
 
