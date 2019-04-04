@@ -20,7 +20,7 @@ _Data Analysis refers to the critical process of performing initial investigatio
 ## Description of the data set
 Fisher's (or Anderson's) iris data set gives the measurements in centimetres of the variables sepal length, sepal width, petal length, and petal width (in that order) for 50 flowers from each of three species of iris. The species are _Iris setosa_, _Iris versicolor_, and _Iris virginica_. The data set consists of 150 rows or observations (50 samples from each species) by five columns. The first four columns contain the samples/measurements and the fifth contains the species name (or class). I obtained the data set as a csv file from GitHub as detailed below.
 
-## Initial analysis
+## Initial analysis of full data set
 The Python script **get-data.py** reads the csv file containing the data set **iris.csv** (located in the same directory) and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
 * .read_csv() to read the file into a DataFrame.
 * .info() to get a brief summary of the resulting DataFrame. 
@@ -40,7 +40,7 @@ SepalLength | SepalWidth | PetalLength | PetalWidth | Name
 4.6 | 3.1 | 1.5 | 0.2 | Iris-setosa
 5.0 | 3.6 | 1.4 | 0.2 | Iris-setosa
 
-The column labels are SepalLength, SepalWidth, PetalLength, and PetalWidth all of type float64. The fifth column label is Name of type object (or string); it holds the name of the species. The dataframe size is 150 rows x 5 columns.
+The column labels are SepalLength, SepalWidth, PetalLength, and PetalWidth all of type float64. The fifth column label is Name of type object (or string); it holds the name of the species. The dataframe size is 150 rows x 5 columns. There are no null values.
 
 ### Plotting the full data set
 
@@ -56,9 +56,9 @@ I then plot the data columns as seperate data series on a single plot using **ma
 
 ![Data overview](Overview.jpeg)
 
-The jumps in observation values from species to species are very obvious in this figure, apart from in the case of SepalWidth (green curve). For that reason, I think it would be more instuctive to analyse the observations applying to each species seperately.
+The jumps in observation values from species to species are very obvious in this figure, apart from in the case of SepalWidth (green curve). For that reason, I think it would probably be more instuctive to analyse the observations applying to each species seperately.
 
-### Descriptive statistics
+### Descriptive statistics of full data set
 
 The descriptive statistics of the full data set is as follows:
 
@@ -73,11 +73,13 @@ min | 4.300000 | 2.000000 | 1.000000 | 0.100000
 75% | 6.400000 | 3.300000 | 5.100000 | 1.800000
 max | 7.900000 | 4.400000 | 6.900000 | 2.500000
 
-Here, count is the number of observations, mean is the mean of the values, std is the standard deviation, and min (max) is the minimum (maximum) of the values. The standard deviation indicates the amount of spread in the values; if it is large then the values are spread over a wide range, while a small standard deviation means that the values are more tightly clustered around the mean. A quick glance at the table of results above shows that the values of SepalLength and  SepalWidth seem to cluster around the mean while the values of PetalLength and PetalWidth have a very large spread in values. 25%, 50%, and 75% are the 25th, 50th, and 75th percentiles respectively. The 50th percentile is equivalent to the median value of the observations. The 50% value is close to the mean for SepalWidth and SepalLength but not so for PetalLength and PetalWidth. Bear in mind that these summary statistics apply to all 150 observations rather than to each species seperately (_i.e_ to each set of 50 observations). In the bar plot of the dataframe, each column corresponds to a colour while each row is nested in a group on the x axis. I use **Pandas** .iloc to select the data I wish to display in the bar plot by using integer-location based indexing into the summary statistics dataframe.
+Here, count is the number of observations, mean is the mean of the values, std is the standard deviation, and min (max) is the minimum (maximum) of the values. The standard deviation indicates the amount of spread in the values; if it is large then the values are spread over a wide range, while a small standard deviation means that the values are more tightly clustered around the mean. A quick glance at the table of results above shows that the values of SepalLength and  SepalWidth seem to cluster around the mean while the values of PetalLength and PetalWidth have a very large spread in values. 25%, 50%, and 75% are the 25th, 50th, and 75th percentiles respectively. The 50th percentile is equivalent to the median value of the observations. The 50% value is close to the mean for SepalWidth and SepalLength but not so for PetalLength and PetalWidth. Bear in mind that these summary statistics apply to all 150 observations rather than to each species seperately (_i.e._ to each set of 50 observations). In the bar plot of the dataframe, each column corresponds to a colour while each row is nested in a group on the x axis. I use **Pandas** .iloc to select the data I wish to display in the bar plot by using integer-location based indexing into the summary statistics dataframe.
 
 ![Summary statistics all species](SummaryStats.jpeg)
 
-## Further analysis
+## Seperate the data into distinct species
+
+The Python script **stats-per-species.py** investigates the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above.
 
 ## Conclusion
 
