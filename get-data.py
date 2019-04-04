@@ -21,6 +21,9 @@ data = pd.read_csv('iris.csv')
 # ###########################################################
 # Look at various attributes of the data to get an idea of its structure.
 
+# General information about the data set.
+print(data.info())
+
 # Print the first few lines.
 print(data.head())
 
@@ -44,11 +47,11 @@ print("col2: ", col_labels[1])
 print("col3: ", col_labels[2])
 print("col4: ", col_labels[3])
 print("col5: ", col_labels[4])
-
+quit()
 # ###########################################################
 # Try some plotting. I want each column as a line.
 
-# Keep track of axes so they can be used again.
+# Keep track of axes so they can be used several times.
 ax = plt.gca()
 
 # Plot each column of the data set as a different colour.
@@ -74,7 +77,7 @@ plt.legend(loc='best', fontsize=10)
 plt.grid()
 
 # Save the figure.
-# plt.savefig('Overview.jpeg')
+plt.savefig('Overview.jpeg')
 
 plt.show()
 
@@ -96,7 +99,7 @@ print(data_summary)
 # ###########################################################
 # Plot these summary statistics as a bar chart.
 
-# Omits count column by selecting all but first row of summary statistics dataframe.
+# Omits count row by selecting all but first row of summary statistics dataframe.
 data_summary.iloc[1:8,0:4].plot.bar()
 
 # Set up graph properties.
@@ -106,7 +109,7 @@ plt.legend(loc='best', fontsize=10)
 plt.grid()
 
 # Save the figure.
-plt.savefig('SummaryStats.jpeg')
+#plt.savefig('SummaryStats.jpeg')
 
 plt.show()
 
