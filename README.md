@@ -89,27 +89,18 @@ std         | 0.35249  | 0.516171   | 0.63588
 min         | 4.30000  | 4.900000   | 4.90000
 50%         | 5.00000  | 5.900000   | 6.50000
 max         | 5.80000  | 7.000000   | 7.90000
-
-Species     |setosa    | versicolor | virginica 
-------------|----------|------------|-----------
 **SepalWidth**  |
 mean        | 3.418000 | 2.77000    | 2.974000
 std         | 0.381024 | 0.313798   | 0.322497
 min         | 2.300000 | 2.000000   | 2.200000
 50%         | 3.400000 | 2.800000   | 3.000000
 max         | 4.400000 | 3.400000   | 3.800000
-
-Species     |setosa    | versicolor | virginica 
-------------|----------|------------|-----------
 **PetalLength** |
 mean        | 1.464000  | 4.260000  | 5.552000
 std         | 0.173511  | 0.469911  | 0.551895
 min         | 1.000000  | 3.000000  | 4.500000
 50%         | 1.500000  | 4.350000  | 5.550000
 max         | 1.900000  | 5.100000  | 6.900000
-
-Species     |setosa    | versicolor | virginica 
-------------|----------|------------|-----------
 **PetalWidth**  |
 mean        | 0.24400   | 1.326000  | 2.02600
 std         | 0.10721   | 0.197753  | 0.27465
@@ -120,9 +111,31 @@ max         | 0.60000   | 1.800000  | 2.50000
 ![Summary statistics Iris-setosa](SetosaStats.jpeg)
 ![Summary statistics Iris-versicolor](VersicolorStats.jpeg)
 ![Summary statistics Iris-virginica](VirginicaStats.jpeg)
+
+Another way to look at the ststistics per species is to use Pandas groupby() to group the data by species name, and obtain statistics about each variable.
+
+Mean(cm)  | SepalLength | SepalWidth | PetalLength | PetalWidth
+----------|-------------|------------|-------------|------------
+Iris-setosa     | 5.006 | 3.418 | 1.464 | 0.244
+Iris-versicolor | 5.936 | 2.770 | 4.260 | 1.326
+Iris-virginica  | 6.588 | 2.974 | 5.552 | 2.026
+
+![Mean values for each species](Mean_species.jpeg)
+
+Std(cm)   | SepalLength | SepalWidth | PetalLength | PetalWidth
+----------|-------------|------------|-------------|------------
+Iris-setosa     | 0.352490 | 0.381024 | 0.173511 | 0.107210
+Iris-versicolor | 0.516171 | 0.313798 | 0.469911 | 0.197753
+Iris-virginica  | 0.635880 | 0.322497 | 0.551895 | 0.274650
+
+![Std values for each species](Std_species.jpeg)
  
 
 ## Conclusion
+
+**List of Python scripts**
+* get-data.py
+* stats-per-species.py
 
 **References**
 1. Sir Ronald Fisher: https://www.britannica.com/biography/Ronald-Aylmer-Fisher 
