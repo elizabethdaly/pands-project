@@ -1,10 +1,11 @@
 # Elizabeth Daly
 # HDip Data Analytics 2019 pands-project
-# 
+#
+# get-data.py
 # Script to read in & analyse the iris data set.
 #
 # ###########################################################
-#
+
 # Import Pandas data analysis library.
 import pandas as pd
 
@@ -47,7 +48,7 @@ print("col2: ", col_labels[1])
 print("col3: ", col_labels[2])
 print("col4: ", col_labels[3])
 print("col5: ", col_labels[4])
-quit()
+
 # ###########################################################
 # Try some plotting. I want each column as a line.
 
@@ -109,27 +110,6 @@ plt.legend(loc='best', fontsize=10)
 plt.grid()
 
 # Save the figure.
-#plt.savefig('SummaryStats.jpeg')
+plt.savefig('SummaryStats.jpeg')
 
 plt.show()
-
-quit()
-#data_summary.plot(kind='bar', y= 'SepalLength')
-#plt.show()
-
-# ###########################################################
-# Start looking at statistics per species.
-
-# Select each column according to its index.
-# The result is a Series.
-slen = data[col_labels[0]]      # col 1
-swid = data[col_labels[1]]      # col 2
-plen = data[col_labels[2]]      # col 3
-pwid = data[col_labels[3]]      # col 4
-species = data[col_labels[3]]   # col 5
-
-#ax1 = plt.gca()
-data.groupby('Name')['SepalLength'].mean().plot(kind='bar')
-#data.groupby('Name')['SepalLength'].std().plot(kind='bar', ax=ax1)
-plt.show()
-
