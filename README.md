@@ -107,6 +107,10 @@ std         | 0.10721   | 0.197753  | 0.27465
 min         | 0.10000   | 1.000000  | 1.40000
 50%         | 0.20000   | 1.300000  | 2.00000
 max         | 0.60000   | 1.800000  | 2.50000
+
+![Summary statistics Iris-setosa](SetosaStats.jpeg)
+![Summary statistics Iris-virginica](VirginicaStats.jpeg)
+![Summary statistics Iris-versicolor](VersicolorStats.jpeg)
  
 
 ## Conclusion
