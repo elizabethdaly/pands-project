@@ -79,7 +79,7 @@ Here, count is the number of observations, mean is the mean of the values, std i
 
 ## Seperate the data into distinct species
 
-The Python script **stats-per-species.py** investigates the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above.
+The Python script **stats-per-species.py** investigates the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below.
 
 Species     |setosa    | versicolor | virginica 
 ------------|----------|------------|-----------
@@ -89,19 +89,19 @@ std         | 0.35249  | 0.516171   | 0.63588
 min         | 4.30000  | 4.900000   | 4.90000
 50%         | 5.00000  | 5.900000   | 6.50000
 max         | 5.80000  | 7.000000   | 7.90000
-SepalWidth  |
+**SepalWidth**  |
 mean        | 3.418000 | 2.77000    | 2.974000
 std         | 0.381024 | 0.313798   | 0.322497
 min         | 2.300000 | 2.000000   | 2.200000
 50%         | 3.400000 | 2.800000   | 3.000000
 max         | 4.400000 | 3.400000   | 3.800000
-PetalLength |
+**PetalLength** |
 mean        | 1.464000  | 4.260000  | 5.552000
 std         | 0.173511  | 0.469911  | 0.551895
 min         | 1.000000  | 3.000000  | 4.500000
 50%         | 1.500000  | 4.350000  | 5.550000
 max         | 1.900000  | 5.100000  | 6.900000
-PetalWidth  |
+**PetalWidth**  |
 mean        | 0.24400   | 1.326000  | 2.02600
 std         | 0.10721   | 0.197753  | 0.27465
 min         | 0.10000   | 1.000000  | 1.40000
