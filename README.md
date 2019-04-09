@@ -81,7 +81,7 @@ Here, count is the number of observations, mean is the mean of the values, std i
 
 The Python script **stats-per-species.py** investigates the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below.
 
-Species=        | setosa   | versicolor | virginica  
+Species         | setosa   | versicolor | virginica  
 ----------------|----------|------------|-----------
 **SepalLength** |          |            |           
 ----------------|----------|------------|-----------
@@ -134,12 +134,18 @@ Iris-virginica  | 0.635880 | 0.322497 | 0.551895 | 0.274650
 
 ![Std values for each species](Std_species.jpeg)
 
-I later realsied that I could investigate the distribution of variables using Matpltlib
-which makes a box and whisker plot for each column of the DataFrame. The box extends from 
-the lower to upper quartile values of the data, with a line at the median. The whiskers 
-extend from the box to show the range of the data. Outlying points are those past the 
-end of the whiskers.
- 
+I later realsied that I could investigate the distribution of variables using Matplotlib
+boxplot, which makes a box and whisker plot for each column of the DataFrame. The box extends 
+from the lower to upper quartile values of the data, with a line at the median. The whiskers 
+extend from the box to show the range of the data. Outliers are those data points past the 
+ends of the whiskers. The result is a very good visual summary of the data.
+
+![Boxplot Iris-setosa](Setosa_boxplot.jpeg)
+![Boxplot Iris-versicolor](Versicolor_boxplot.jpeg)
+![Boxplot Iris-virginica](Virginica_boxplot.jpeg)
+
+## Other analyses
+## Work done by others
 
 ## Conclusion
 
