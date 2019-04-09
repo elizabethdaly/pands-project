@@ -58,7 +58,7 @@ I then plot the data columns as seperate data series on a single plot using **ma
 
 The jumps in observation values from species to species are very obvious in this figure, apart from in the case of SepalWidth (green curve). For that reason, I think it would probably be more instuctive to analyse the observations applying to each species seperately.
 
-### Descriptive statistics of full data set
+### Descriptive statistics of the full data set
 
 The descriptive statistics of the full data set is as follows:
 
@@ -129,6 +129,12 @@ Iris-versicolor | 0.516171 | 0.313798 | 0.469911 | 0.197753
 Iris-virginica  | 0.635880 | 0.322497 | 0.551895 | 0.274650
 
 ![Std values for each species](Std_species.jpeg)
+
+I later realsied that I could investigate the distribution of variables using Matpltlib
+which makes a box and whisker plot for each column of the DataFrame. The box extends from 
+the lower to upper quartile values of the data, with a line at the median. The whiskers 
+extend from the box to show the range of the data. Outlying points are those past the 
+end of the whiskers.
  
 
 ## Conclusion
