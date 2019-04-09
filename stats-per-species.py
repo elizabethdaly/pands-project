@@ -25,7 +25,7 @@ print("Data column labels: ", col_labels)
 
 # ###########################################################
 # Create 3 dataframes, each corresponding to a single species.
-# Select rows based on species names using .iloc[]
+# Select rows based on species names using .loc[]
 setosa = data.loc[data['Name'] == "Iris-setosa"]
 versicolor = data.loc[data['Name'] == "Iris-versicolor"]
 virginica = data.loc[data['Name'] == "Iris-virginica"]
@@ -100,4 +100,28 @@ plt.title('Standard deviation of variable values')
 plt.ylabel('cm', fontsize=16)
 plt.grid()
 plt.savefig('Std_species.jpeg')
+plt.show()
+
+# ###########################################################
+# Or, I could do almost all of above visually using Matplotlib box and whisker plot
+
+# Setosa
+setosa.boxplot()
+plt.title("Setosa boxplot", fontsize=18)
+plt.ylabel('cm', fontsize=16)
+plt.savefig('Setoasa_boxplot.jpeg')
+plt.show()
+
+# Versicolor
+versicolor.boxplot()
+plt.title("Versicolor boxplot", fontsize=18)
+plt.ylabel('cm', fontsize=16)
+plt.savefig('Versicolor_boxplot.jpeg')
+plt.show()
+
+# Virginica
+virginica.boxplot()
+plt.title("Virginica boxplot", fontsize=18)
+plt.ylabel('cm', fontsize=16)
+plt.savefig('Virginica_boxplot.jpeg')
 plt.show()
