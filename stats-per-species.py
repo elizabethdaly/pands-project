@@ -23,6 +23,10 @@ print("n rows = ", d_shape[0], ", n_cols = ", d_shape[1] )
 col_labels = data.columns
 print("Data column labels: ", col_labels)
 
+# List the unique values in data['Name'] column i.ie species.
+species = data.Name.unique()
+print("The three species are: ", species)
+
 # ###########################################################
 # Create 3 dataframes, each corresponding to a single species.
 # Select rows based on species names using .loc[]
