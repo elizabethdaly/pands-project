@@ -42,6 +42,10 @@ print("Data index: ", data.index)
 col_labels = data.columns
 print("Data column labels: ", col_labels)
 
+# List the unique values in data['Name'] column i.ie species.
+species = data.Name.unique()
+print("The three species are: ", species)
+
 # These are the column headings.
 print("col1: ", col_labels[0])
 print("col2: ", col_labels[1])
