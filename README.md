@@ -6,6 +6,8 @@
 Git-hub repository at:
 https://github.com/elizabethdaly/pands-project.git
 
+![Irises](IrisTypes.png)
+
 # The Fisher Iris Data Set
 
 ## Introduction
@@ -18,9 +20,9 @@ When starting this project I often encountered the term "Exploratory Data Analys
 _Data Analysis refers to the critical process of performing initial investigations on data so as to discover patterns, to spot anomalies, to test hypothesis and to check assumptions with the help of summary statistics and graphical representations._ For this project, we are performing EDA on the Iris data set.
 
 ## Description of the data set
-Fisher's (or Anderson's) iris data set gives the measurements in centimetres of the variables sepal length, sepal width, petal length, and petal width (in that order) for 50 flowers from each of three species of iris. The species are _Iris setosa_, _Iris versicolor_, and _Iris virginica_. The data set consists of 150 rows or observations (50 samples from each species) by five columns. The first four columns contain the samples/measurements and the fifth contains the species name (or class). I obtained the data set as a csv file from GitHub as detailed below.
+Fisher's (or Anderson's) iris data set is a multivariate data set as each observation/sample consists of four variables. It contains the measurements in centimetres of the variables sepal length, sepal width, petal length, and petal width (in that order) for 50 flowers from each of three species of iris. The species are _Iris setosa_, _Iris versicolor_, and _Iris virginica_. The data set consists of 150 rows or observations (50 samples from each species) by five columns. The first four columns contain the samples/measurements and the fifth contains the species name (or class). I obtained the data set as a csv file from GitHub as detailed below.
 
-## Initial analysis of full data set
+## Initial analysis of the full data set
 The Python script **get-data.py** reads the csv file containing the data set **iris.csv** (located in the same directory) and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
 * .read_csv() to read the file into a DataFrame.
 * .info() to get a brief summary of the resulting DataFrame. 
@@ -116,7 +118,7 @@ max             | 0.60000   | 1.800000  | 2.50000
 ![Summary statistics Iris-versicolor](VersicolorStats.jpeg)
 ![Summary statistics Iris-virginica](VirginicaStats.jpeg)
 
-Another way to look at the ststistics per species is to use Pandas groupby() to group the data by species name, and obtain statistics about each variable.
+Another way to look at the ststistics per species is to use **Pandas** groupby() to group the data according to species name and obtain statistics about each variable.
 
 Mean(cm)  | SepalLength | SepalWidth | PetalLength | PetalWidth
 ----------|-------------|------------|-------------|------------
@@ -134,17 +136,30 @@ Iris-virginica  | 0.635880 | 0.322497 | 0.551895 | 0.274650
 
 ![Std values for each species](Std_species.jpeg)
 
-I later realsied that I could investigate the distribution of variables using Matplotlib
+I later realsied that I could investigate the distribution of variables using **Matplotlib**
 boxplot, which makes a box and whisker plot for each column of the DataFrame. The box extends 
 from the lower to upper quartile values of the data, with a line at the median. The whiskers 
 extend from the box to show the range of the data. Outliers are those data points past the 
-ends of the whiskers. The result is a very good visual summary of the data.
+ends of the whiskers. The result is a very good visual summary of the data. Any observations? Few outliers. 
 
 ![Boxplot Iris-setosa](Setosa_boxplot.jpeg)
 ![Boxplot Iris-versicolor](Versicolor_boxplot.jpeg)
 ![Boxplot Iris-virginica](Virginica_boxplot.jpeg)
 
-## Other analyses
+## Discriminating between species
+While researching the iris data set I found that there are lots of example analyses online, some very complicated. It seems to be commonly used to demonstrate classification problems such as how to seperate classes from each other and how to predict which class a sample belongs to if the class label for that sample is unknown. The classes here are the three species, there are 50 samples per class, with each sample consisting of four variables or attributes (SepalLength, SepalWidth, PetalLength, PetalWidth).
+I will start by looking at how well the variables for each class are separated from each other using histograms. class-separation.py 
+Explain more & for legend I needed data.Name.unique() Try subplot. Explain graphs.
+
+![Histogram SepalLength](Hist_SepalLength.jpeg)
+![Histogram SepalWidth](Hist_SepalWidth.jpeg)
+![Histogram PetalLength](Hist_PetalLength.jpeg)
+![Histogram PetalWidth](Hist_PetalWidth.jpeg)
+
+plot sepal length vs width
+plot petal length vs width
+Fitting
+
 ## Work done by others
 
 ## Conclusion
@@ -152,6 +167,7 @@ ends of the whiskers. The result is a very good visual summary of the data.
 **List of Python scripts**
 * get-data.py
 * stats-per-species.py
+* class-separation.py
 
 **References**
 1. Sir Ronald Fisher: https://www.britannica.com/biography/Ronald-Aylmer-Fisher 
@@ -165,4 +181,10 @@ ends of the whiskers. The result is a very good visual summary of the data.
 9. matplotlib Python 2D plotting library: https://matplotlib.org/
 10. Pandas DataFrames: https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/
 11. Plotting examples: http://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
-12. https://tomaugspurger.github.io/modern-1-intro.html
+12. Examples of working with DataFrames: https://tomaugspurger.github.io/modern-1-intro.html
+13. Typical data analyses: https://machinelearningmastery.com/quick-and-dirty-data-analysis-with-pandas/
+14. Visualising data with Python: https://www.analyticsvidhya.com/blog/2015/05/data-visualization-python/
+15. The iris data set in scikit-learn: https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
+16. Scikit-learn iris data set analyses: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html
+17. Image of iris species: https://medium.com/@pranav_suresh/iris-classification-using-logistic-regression-using-octave-873bca96ec5b
+18. Idea for histograms of attribute for three species at same time: https://stackoverflow.com/questions/45721083/unable-to-plot-4-histograms-of-iris-dataset-features-using-matplotlib
