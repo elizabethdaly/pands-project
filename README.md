@@ -10,19 +10,48 @@ https://github.com/elizabethdaly/pands-project.git
 
 # The Fisher Iris Data Set
 
-## Introduction
+# Table of contents
+1. [Introduction](#introduction)
+    1. [Ronald Fisher](#introRF)
+    2. [Exploratory data analysis](#EDA)
+    3. [Description of the data set](#datadescription)
+2. [Full data set initial analysis](#paragraph2)
+    1. [Plotting the full data set](#plotall)
+    2. [Descriptive statistics of the full data set](#statsall)
+3. [Seperate the data into distinct species](#paragraph3)
+4. [Discriminating between species](#paragraph4)
+5. [Other work](#paragraph5)
+6. [Conclusion](#conclusion)
+6. [List of Python scripts](#scripts)
+7. [References](#references)
+
+## This is the introduction <a name="introduction"></a>
+Some introduction text, formatted in heading 2 style
+
+## Some paragraph <a name="paragraph1"></a>
+The first paragraph text
+
+### Sub paragraph <a name="subparagraph1"></a>
+This is a sub paragraph, formatted in heading 3 style
+
+## Another paragraph <a name="paragraph2"></a>
+The second paragraph text
+
+## Introduction <a name="introduction"></a>
+
+### Ronald Fisher <a name="introRF"></a>
 Sir Ronald Fisher (1890-1962) was a British statistician and biologist who is best known for his work in the application of statistics to the design of scientific experiments. Following undergraduate study in mathematics at the University of Cambridge, he remained there for postgraduate work in physics, including the theory of errors. He continued his research in statistics over the next few years while working in various jobs - insurance company ststistician and teacher. In 1919 he became the statistician at the Rothamsted Experimental Station in Hertfordshire, where he had access to huge amounts of agricultural data. Here, he developed and applied statistical methods to the design of plant breeding experiments in order to get maximum useful information from the experiments while minimizing time, effort, and money. He held academic positions at University College London and Cambridge University before retiring to Australia, where he died in 1962. During his career he published many articles and books on various topics in statistics and genetics, including the method of maximum likelihood estimation and the analysis of variance.
 
 Fisher introduced the iris flower data set and the linear discriminent analysis (LDA) in a 1936 publication. LDA is a method to reduce the number of dimensions in data sets in order to perform pattern classification or machine learning. As the MathWorks reference below states, if one has a data set containing observations with measurements on many variables and their known classes, could this data be used to determne which class measurements from new  observations are most likely to belong to? It seems to be a popular data set for demonstrating how to perform classification and for providing training sets in machine learning (see Wolfram reference below).  
 
-## Exploratory data analysis
+### Exploratory data analysis <a name="EDA"></a>
 When starting this project I often encountered the term "Exploratory Data Analysis" (EDA). I found a good definition on the towardsdatascience website: 
 _Data Analysis refers to the critical process of performing initial investigations on data so as to discover patterns, to spot anomalies, to test hypothesis and to check assumptions with the help of summary statistics and graphical representations._ For this project, we are performing EDA on the Iris data set.
 
-## Description of the data set
+### Description of the data set <a name="datadescription"></a>
 Fisher's (or Anderson's) iris data set is a multivariate data set as each observation/sample consists of four variables. It contains the measurements in centimetres of the variables sepal length, sepal width, petal length, and petal width (in that order) for 50 flowers from each of three species of iris. The species are _Iris setosa_, _Iris versicolor_, and _Iris virginica_. The data set consists of 150 rows or observations (50 samples from each species) by five columns. The first four columns contain the samples/measurements and the fifth contains the species name (or class). I obtained the data set as a csv file from GitHub as detailed below.
 
-## Initial analysis of the full data set
+##  Full data set initial analysis <a name="paragraph2"></a>
 Python script: **get-data.py** 
 
 This script reads the csv file containing the data set **iris.csv** (located in the same directory) and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
@@ -39,7 +68,7 @@ The output of **get-data.py** looks like:
 
 The column labels are SepalLength, SepalWidth, PetalLength, and PetalWidth all of type float64. The fifth column label is Name of type object (or string); it holds the name of the species. The dataframe size is 150 rows x 5 columns. There are no null values. The head of the file is printed to the screen in the image above and gives an idea of its structure.
 
-### Plotting the full data set
+### Plotting the full data set <a name="plotall"></a>
 
 I then plot the data columns as seperate data series on a single plot using **matplotlib**. I explain the commands here the first time I use them.
 * plt.xlim() to set x axis range.
@@ -55,7 +84,7 @@ I then plot the data columns as seperate data series on a single plot using **ma
 
 The jumps in observation values from species to species are very obvious in this figure, apart from in the case of SepalWidth (green curve). For that reason, I think it would probably be more instuctive to analyse the observations applying to each species seperately.
 
-### Descriptive statistics of the full data set
+### Descriptive statistics of the full data set <a name="statsall"></a>
 
 The descriptive statistics of the full data set is as follows:
 
@@ -74,7 +103,7 @@ Here, count is the number of observations, mean is the mean of the values, std i
 
 ![Summary statistics all species](SummaryStats.jpeg)
 
-## Seperate the data into distinct species
+## Seperate the data into distinct species <a name="paragraph3"></a>
 
 Python script: **stats-per-species.py** 
 
@@ -134,15 +163,18 @@ ends of the whiskers. The result is a very good visual summary of the data. Any 
 ![Boxplot Iris-versicolor](Versicolor_boxplot.jpeg)
 ![Boxplot Iris-virginica](Virginica_boxplot.jpeg)
 
-## Discriminating between species
+## Discriminating between species <a name="paragraph4"></a>
 Python script: **class-separation.py**
+
 While researching the iris data set I found that there are lots of example analyses online; these include very simple ones which just describe the data set, to very complicated machine learning and LDA and PCA analyses. It seems to be commonly used to demonstrate classification problems such as how to seperate classes from each other and how to predict which class a sample belongs to if the class label for that sample is unknown. The classes here are the three species, there are 50 samples per class, with each sample consisting of four variables or attributes (SepalLength, SepalWidth, PetalLength, PetalWidth).
 The output of **class-separation.py** looks like:
 ![get-data.py output](class-separation_OP.JPG)
 
-I started by looking at how well the variables for each class are separated from each other using histograms. To do this I used:
-* data.Name.unique() to list the unique values in data['Name'] column.
-* legend
+I started by asking if the variables for each class are well separated from each other? If they are, then it could be possible to predict which species a particular observation belongs to given a particular variable value. I plotted  histograms of each attribute for all three species at the same time using the **Pandas** groupby() and hist()functions. 
+* species = data.Name.unique() to store the unique values in DataFrame data['Name'] column.
+* .hist() kwargs alpha=0.5 (0.0 transparent through 1.0 opaque) to see overlapping histograms.
+* .hist() parameter Stacked=True so that multiple data are stacked on top of each other.
+* plt.legend((species), loc='best', fontsize=12) to get the correct legend for each plot. I spent a long time trying to get this right as trying to insert a legend using via hist(label=) resulted in all histograms having the same legend, the first one in species array. Found out that there is only one legend per plot, so it needs to be updated each time a histogram is drawn on a given plot.  
 
 Explain more & for legend I needed  Try subplot. Explain graphs.
 
@@ -155,16 +187,16 @@ plot sepal length vs width
 plot petal length vs width
 Fitting
 
-## Work done by others
+## Other work <a name="paragraph5"></a>
 
-## Conclusion
+## Conclusion <a name="conclusion"></a>
 
-**List of Python scripts**
+## List of Python scripts <a name="scripts"></a>
 * get-data.py
 * stats-per-species.py
 * class-separation.py
 
-**References**
+## References <a name="references"></a>
 1. Sir Ronald Fisher: https://www.britannica.com/biography/Ronald-Aylmer-Fisher 
 2. Sir Ronald Fisher: https://study.com/academy/lesson/sir-ronald-fisher-biography-contributions-to-statistics.html
 3. Linear Discriminant Analysis: https://sebastianraschka.com/Articles/2014_python_lda.html
@@ -183,3 +215,4 @@ Fitting
 16. Scikit-learn iris data set analyses: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html
 17. Image of iris species: https://medium.com/@pranav_suresh/iris-classification-using-logistic-regression-using-octave-873bca96ec5b
 18. Idea for histograms of attribute for three species at same time: https://stackoverflow.com/questions/45721083/unable-to-plot-4-histograms-of-iris-dataset-features-using-matplotlib
+19. Table of contents in markdown: https://stackoverflow.com/questions/11948245/markdown-to-create-pages-and-table-of-contents
