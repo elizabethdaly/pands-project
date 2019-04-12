@@ -170,13 +170,13 @@ While researching the iris data set I found that there are lots of example analy
 The output of **class-separation.py** looks like:
 ![get-data.py output](class-separation_OP.JPG)
 
-I started by asking if the variables for each class are well separated from each other? If they are, then it could be possible to predict which species a particular observation belongs to given a particular variable value. I plotted  histograms of each attribute for all three species at the same time using the **Pandas** groupby() and hist()functions. 
+I started by asking if the variables for each class are well separated from each other? If they are, then it could be possible to predict which species a particular observation belongs to given a variable value. I plotted  histograms of each attribute for all three species at the same time using the **Pandas** groupby() and hist() functions. 
 * species = data.Name.unique() to store the unique values in DataFrame data['Name'] column.
 * .hist() kwargs alpha=0.5 (0.0 transparent through 1.0 opaque) to see overlapping histograms.
 * .hist() parameter Stacked=True so that multiple data are stacked on top of each other.
-* plt.legend((species), loc='best', fontsize=12) to get the correct legend for each plot. I spent a long time trying to get this right as trying to insert a legend using via hist(label=) resulted in all histograms having the same legend, the first one in species array. Found out that there is only one legend per plot, so it needs to be updated each time a histogram is drawn on a given plot.  
+* plt.legend((species), loc='best', fontsize=12) to get the correct legend for each plot. I spent a long time trying to get this right as trying to insert a legend with hist(label=) resulted in all histograms having the same legend, the first one in species array. I found out that there is only one legend per plot, so it needs to be updated each time a histogram is drawn on a given plot. This syntax was able to do that.
 
-Explain more & for legend I needed  Try subplot. Explain graphs.
+Try subplot. Explain graphs.
 
 ![Histogram SepalLength](Hist_SepalLength.jpeg)
 ![Histogram SepalWidth](Hist_SepalWidth.jpeg)
