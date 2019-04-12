@@ -79,6 +79,11 @@ Here, count is the number of observations, mean is the mean of the values, std i
 Python script: **stats-per-species.py** 
 
 I used this script to investigate the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below.
+Interesting python commamds used here include:
+* setosa = data.loc[data['Name'] == "Iris-setosa"] to select a subset of data based on class.
+* setosa_summary.loc[['mean', 'std', '50%']].plot.bar() to select part of a DataFrame for plotting.
+* data.groupby('Name')['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth'].mean() to calculate the mean of each variable grouped by Name = species.
+* setosa.boxplot() to calculate a boxplot of the setosa DataFrame for example.
 
 **SepalLength**| setosa   | versicolor | virginica |**SepalWidth**| setosa   | versicolor | virginica
 ---------------|----------|------------|-----------|--------------|----------|------------|----------
@@ -132,9 +137,14 @@ ends of the whiskers. The result is a very good visual summary of the data. Any 
 ## Discriminating between species
 Python script: **class-separation.py**
 While researching the iris data set I found that there are lots of example analyses online; these include very simple ones which just describe the data set, to very complicated machine learning and LDA and PCA analyses. It seems to be commonly used to demonstrate classification problems such as how to seperate classes from each other and how to predict which class a sample belongs to if the class label for that sample is unknown. The classes here are the three species, there are 50 samples per class, with each sample consisting of four variables or attributes (SepalLength, SepalWidth, PetalLength, PetalWidth).
+The output of **class-separation.py** looks like:
+![get-data.py output](class-separation_OP.JPG)
 
-I will start by looking at how well the variables for each class are separated from each other using histograms. class-separation.py 
-Explain more & for legend I needed data.Name.unique() Try subplot. Explain graphs.
+I started by looking at how well the variables for each class are separated from each other using histograms. To do this I used:
+* data.Name.unique() to list the unique values in data['Name'] column.
+* legend
+
+Explain more & for legend I needed  Try subplot. Explain graphs.
 
 ![Histogram SepalLength](Hist_SepalLength.jpeg)
 ![Histogram SepalWidth](Hist_SepalWidth.jpeg)
