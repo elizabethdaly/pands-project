@@ -24,6 +24,7 @@ Fisher's (or Anderson's) iris data set is a multivariate data set as each observ
 
 ## Initial analysis of the full data set
 Python script: **get-data.py** 
+
 This script reads the csv file containing the data set **iris.csv** (located in the same directory) and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
 * .read_csv() to read the file into a DataFrame.
 * .info() to get a brief summary of the resulting DataFrame. 
@@ -36,17 +37,7 @@ This script reads the csv file containing the data set **iris.csv** (located in 
 The output of **get-data.py** looks like:
 ![get-data.py output](get-data_OP.JPG)
 
-The head of the file looks like:
-
-SepalLength | SepalWidth | PetalLength | PetalWidth | Name
-------------|------------|-------------|------------|-----
-5.1 | 3.5 | 1.4 | 0.2 | Iris-setosa
-4.9 | 3.0 | 1.4 | 0.2 | Iris-setosa
-4.7 | 3.2 | 1.3 | 0.2 | Iris-setosa
-4.6 | 3.1 | 1.5 | 0.2 | Iris-setosa
-5.0 | 3.6 | 1.4 | 0.2 | Iris-setosa
-
-The column labels are SepalLength, SepalWidth, PetalLength, and PetalWidth all of type float64. The fifth column label is Name of type object (or string); it holds the name of the species. The dataframe size is 150 rows x 5 columns. There are no null values.
+The column labels are SepalLength, SepalWidth, PetalLength, and PetalWidth all of type float64. The fifth column label is Name of type object (or string); it holds the name of the species. The dataframe size is 150 rows x 5 columns. There are no null values. The head of the file is printed to the screen in the image above and gives an idea of its structure.
 
 ### Plotting the full data set
 
@@ -86,7 +77,17 @@ Here, count is the number of observations, mean is the mean of the values, std i
 ## Seperate the data into distinct species
 
 Python script: **stats-per-species.py** 
+
 I used this script to investigate the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below.
+
+**SepalLength**|          |            |           |**SepalWidth**|            |
+---------------|----------|------------|-----------|--------------|------------|----------
+               | setosa   | versicolor | virginica | setosa       | versicolor | virginica
+mean           | 5.00600  | 5.936000   | 6.58800   | 3.418000     | 2.77000    | 2.974000
+std            | 0.35249  | 0.516171   | 0.63588   | 0.381024     | 0.313798   | 0.322497
+min            | 4.30000  | 4.900000   | 4.90000   | 2.300000     | 2.000000   | 2.200000
+50%            | 5.00000  | 5.900000   | 6.50000   | 3.400000     | 2.800000   | 3.000000
+max            | 5.80000  | 7.000000   | 7.90000   | 4.400000     | 3.400000   | 3.800000
 
 Species         | setosa   | versicolor | virginica  
 ----------------|----------|------------|-----------
@@ -123,7 +124,7 @@ max             | 0.60000   | 1.800000  | 2.50000
 ![Summary statistics Iris-versicolor](VersicolorStats.jpeg)
 ![Summary statistics Iris-virginica](VirginicaStats.jpeg)
 
-Another way to look at the ststistics per species is to use **Pandas** groupby() to group the data according to species name and obtain statistics about each variable.
+Another way to look at the statistics per species is to use **Pandas** groupby() to group the data according to species name and obtain statistics about each variable.
 
 Mean(cm)  | SepalLength | SepalWidth | PetalLength | PetalWidth
 ----------|-------------|------------|-------------|------------
