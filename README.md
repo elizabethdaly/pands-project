@@ -23,7 +23,8 @@ _Data Analysis refers to the critical process of performing initial investigatio
 Fisher's (or Anderson's) iris data set is a multivariate data set as each observation/sample consists of four variables. It contains the measurements in centimetres of the variables sepal length, sepal width, petal length, and petal width (in that order) for 50 flowers from each of three species of iris. The species are _Iris setosa_, _Iris versicolor_, and _Iris virginica_. The data set consists of 150 rows or observations (50 samples from each species) by five columns. The first four columns contain the samples/measurements and the fifth contains the species name (or class). I obtained the data set as a csv file from GitHub as detailed below.
 
 ## Initial analysis of the full data set
-The Python script **get-data.py** reads the csv file containing the data set **iris.csv** (located in the same directory) and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
+Python script: **get-data.py** 
+This script reads the csv file containing the data set **iris.csv** (located in the same directory) and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
 * .read_csv() to read the file into a DataFrame.
 * .info() to get a brief summary of the resulting DataFrame. 
 * .head() to look at the first few lines of the data set.
@@ -31,6 +32,9 @@ The Python script **get-data.py** reads the csv file containing the data set **i
 * .shape to find the number of rows and columns in the dataframe.
 * .columns to find the labels of each column.
 * .describe() to generate some descriptive statistics for each column of numeric data. The output of describe() is another dataframe.
+
+The output of **get-data.py** looks like:
+![get-data.py output](get-data_OP.jpeg)
 
 The head of the file looks like:
 
@@ -81,7 +85,8 @@ Here, count is the number of observations, mean is the mean of the values, std i
 
 ## Seperate the data into distinct species
 
-The Python script **stats-per-species.py** investigates the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below.
+Python script: **stats-per-species.py** 
+I used this script to investigate the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below.
 
 Species         | setosa   | versicolor | virginica  
 ----------------|----------|------------|-----------
@@ -147,7 +152,9 @@ ends of the whiskers. The result is a very good visual summary of the data. Any 
 ![Boxplot Iris-virginica](Virginica_boxplot.jpeg)
 
 ## Discriminating between species
-While researching the iris data set I found that there are lots of example analyses online, some very complicated. It seems to be commonly used to demonstrate classification problems such as how to seperate classes from each other and how to predict which class a sample belongs to if the class label for that sample is unknown. The classes here are the three species, there are 50 samples per class, with each sample consisting of four variables or attributes (SepalLength, SepalWidth, PetalLength, PetalWidth).
+Python script: **class-separation.py**
+While researching the iris data set I found that there are lots of example analyses online; these include very simple ones which just describe the data set, to very complicated machine learning and LDA and PCA analyses. It seems to be commonly used to demonstrate classification problems such as how to seperate classes from each other and how to predict which class a sample belongs to if the class label for that sample is unknown. The classes here are the three species, there are 50 samples per class, with each sample consisting of four variables or attributes (SepalLength, SepalWidth, PetalLength, PetalWidth).
+
 I will start by looking at how well the variables for each class are separated from each other using histograms. class-separation.py 
 Explain more & for legend I needed data.Name.unique() Try subplot. Explain graphs.
 
