@@ -175,15 +175,13 @@ I started by asking if the variables for each class are well separated from each
 * .hist() kwargs alpha=0.5 (0.0 transparent through 1.0 opaque) to see overlapping histograms.
 * .hist() parameter Stacked=True so that multiple data are stacked on top of each other.
 * plt.legend((species), loc='best', fontsize=12) to get the correct legend for each plot. I spent a long time trying to get this right as trying to insert a legend with hist(label=) resulted in all histograms having the same legend, the first one in species array. I found out that there is only one legend per plot, so it needs to be updated each time a histogram is drawn on a given plot. This syntax was able to do that.
+* legend transparency
+
+I started by generating four seperate figures, but a single properly formatted figure with four subplots looks much better.
 
 ![Histograms all attributes](Hist_4attributes.jpeg)
 
-Try subplot. Explain graphs.
-
-![Histogram SepalLength](Hist_SepalLength.jpeg)
-![Histogram SepalWidth](Hist_SepalWidth.jpeg)
-![Histogram PetalLength](Hist_PetalLength.jpeg)
-![Histogram PetalWidth](Hist_PetalWidth.jpeg)
+Explain graphs.
 
 plot sepal length vs width
 plot petal length vs width
