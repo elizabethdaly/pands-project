@@ -34,7 +34,7 @@ This script reads the csv file containing the data set **iris.csv** (located in 
 * .describe() to generate some descriptive statistics for each column of numeric data. The output of describe() is another dataframe.
 
 The output of **get-data.py** looks like:
-![get-data.py output](get-data_OP.jpeg)
+![get-data.py output](get-data_OP.JPG)
 
 The head of the file looks like:
 
