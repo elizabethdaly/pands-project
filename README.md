@@ -80,14 +80,13 @@ Python script: **stats-per-species.py**
 
 I used this script to investigate the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below.
 
-**SepalLength**|          |            |           |**SepalWidth**|            |
----------------|----------|------------|-----------|--------------|------------|----------
-               | setosa   | versicolor | virginica | setosa       | versicolor | virginica
-mean           | 5.00600  | 5.936000   | 6.58800   | 3.418000     | 2.77000    | 2.974000
-std            | 0.35249  | 0.516171   | 0.63588   | 0.381024     | 0.313798   | 0.322497
-min            | 4.30000  | 4.900000   | 4.90000   | 2.300000     | 2.000000   | 2.200000
-50%            | 5.00000  | 5.900000   | 6.50000   | 3.400000     | 2.800000   | 3.000000
-max            | 5.80000  | 7.000000   | 7.90000   | 4.400000     | 3.400000   | 3.800000
+**SepalLength**| setosa   | versicolor | virginica |**SepalWidth**| setosa   | versicolor | virginica
+---------------|----------|------------|-----------|--------------|----------|------------|----------
+mean           | 5.00600  | 5.936000   | 6.58800   | mean | 3.418000     | 2.77000    | 2.974000
+std            | 0.35249  | 0.516171   | 0.63588   | std  | 0.381024     | 0.313798   | 0.322497
+min            | 4.30000  | 4.900000   | 4.90000   | *min | 2.300000     | 2.000000   | 2.200000
+50%            | 5.00000  | 5.900000   | 6.50000   | 50%  | 3.400000     | 2.800000   | 3.000000
+max            | 5.80000  | 7.000000   | 7.90000   | max  | 4.400000     | 3.400000   | 3.800000
 
 Species         | setosa   | versicolor | virginica  
 ----------------|----------|------------|-----------
