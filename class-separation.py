@@ -66,7 +66,8 @@ plt.savefig('Hist_PetalWidth.jpeg')
 plt.show()
 
 # Plot all four histograms in one figure using subplot.
-# Use a shorter legend for these small graphs maybe.
+# Edit legend for these small graphs.
+# Leave out some x and y axes titles to avoid crowding.
 plt.subplot(2,2,1)
 data.groupby('Name')['SepalLength'].hist(bins=10, alpha=0.5, stacked=True)
 plt.title('SepalLength', fontsize=12)
@@ -101,7 +102,10 @@ plt.tight_layout()
 plt.savefig('Hist_4attributes.jpeg')
 plt.show()
 
-quit()
-# scatter matrix?
-data.plot.scatter(x='SepalLength', y='SepalWidth')
+# Plot the scatter matrix to see how the variables are related - or not.
+# Needed this to avoid a FutureWarning related to location of plotting module.
+from pandas.plotting import scatter_matrix
+
+pd.plotting.scatter_matrix(data, alpha=0.8)
+plt.savefig('ScatterMatrix_Pandas.jpeg')
 plt.show()
