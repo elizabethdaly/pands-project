@@ -25,18 +25,6 @@ https://github.com/elizabethdaly/pands-project.git
 6. [List of Python scripts](#scripts)
 7. [References](#references)
 
-## This is the introduction <a name="introduction"></a>
-Some introduction text, formatted in heading 2 style
-
-## Some paragraph <a name="paragraph1"></a>
-The first paragraph text
-
-### Sub paragraph <a name="subparagraph1"></a>
-This is a sub paragraph, formatted in heading 3 style
-
-## Another paragraph <a name="paragraph2"></a>
-The second paragraph text
-
 ## Introduction <a name="introduction"></a>
 
 ### Ronald Fisher <a name="introRF"></a>
@@ -107,8 +95,7 @@ Here, count is the number of observations, mean is the mean of the values, std i
 
 Python script: **stats-per-species.py** 
 
-I used this script to investigate the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below.
-Interesting python commamds used here include:
+I used this script to investigate the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below. It is also possible to investigate some statistical proerties of the data set without breaking it into seperate DataFrames for each species. This is done using **Pandas** groupby to select sampes based on (species) Name. Some of the Python commamds used here include:
 * setosa = data.loc[data['Name'] == "Iris-setosa"] to select a subset of data based on class.
 * setosa_summary.loc[['mean', 'std', '50%']].plot.bar() to select part of a DataFrame for plotting.
 * data.groupby('Name')['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth'].mean() to calculate the mean of each variable grouped by Name = species.
@@ -175,13 +162,15 @@ I started by asking if the variables for each class are well separated from each
 * .hist() kwargs alpha=0.5 (0.0 transparent through 1.0 opaque) to see overlapping histograms.
 * .hist() parameter Stacked=True so that multiple data are stacked on top of each other.
 * plt.legend((species), loc='best', fontsize=12) to get the correct legend for each plot. I spent a long time trying to get this right as trying to insert a legend with hist(label=) resulted in all histograms having the same legend, the first one in species array. I found out that there is only one legend per plot, so it needs to be updated each time a histogram is drawn on a given plot. This syntax was able to do that.
-* legend transparency
+* legend box style and transparency set with fancybox=True (round edges on legend box) and framealpha=0.5 (to allow for visualization of data behind the box in this relatively crowded figure).
 
-I started by generating four seperate figures, but a single properly formatted figure with four subplots looks much better.
+I started by generating four seperate figures, but a single properly formatted figure with four subplots looks much better. From this plot it is clear that SepalLength and SepalWidth would not be good variables to look at if trying to separate the three species as the histograms for each species overlap significantly. However, the Iris setosa histograms for PetalLength and PetalWidth values seems to be well seperated from those of the other two species. So it would be possible to assign an observation to class Iris setosa if given the values of these two variables.
 
 ![Histograms all attributes](Hist_4attributes.jpeg)
 
-Explain graphs.
+I also used **Pandas** scatter_matrix to examine if there is a linear correlation between any of the four variables. The R-bloggers website listed in the references gives a good simple explanation of what the scatter matrix means. Briefly, each variable is plotted against itself and all the others (here there are 4 x 4 = 16 subplots). If the data points look like they are tending to form a line (row 1 col 3 showing SepalLength vs PetalLength), then those two variables are probably correlated; if they don't (row 1 col 2 showing SepalLength vs SepalWidth), then there is less of a correlation. The diagonal subplots here are histograms of that variable. It would be nice to differentiate the classes (species) here; for that I think I need to use the Seaborn data visualization library. 
+
+![Pandas scatter matrix](ScatterMatrix_Pandas.jpeg)
 
 plot sepal length vs width
 plot petal length vs width
@@ -214,5 +203,7 @@ Fitting
 15. The iris data set in scikit-learn: https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
 16. Scikit-learn iris data set analyses: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html
 17. Image of iris species: https://medium.com/@pranav_suresh/iris-classification-using-logistic-regression-using-octave-873bca96ec5b
-18. Idea for histograms of attribute for three species at same time: https://stackoverflow.com/questions/45721083/unable-to-plot-4-histograms-of-iris-dataset-features-using-matplotlib
+18. Idea (but not the code) for histograms of attributes for three species at same time: https://stackoverflow.com/questions/45721083/unable-to-plot-4-histograms-of-iris-dataset-features-using-matplotlib
 19. Table of contents in markdown: https://stackoverflow.com/questions/11948245/markdown-to-create-pages-and-table-of-contents
+20. Simple explanation of scatter matrix: https://www.r-bloggers.com/scatterplot-matrices/
+21. Seaborn: https://seaborn.pydata.org/index.html
