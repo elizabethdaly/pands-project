@@ -3,7 +3,7 @@
 # 
 # class-separation.py
 # Script to read in and analyse the iris data set
-#
+# How well separated are the species?
 # ###########################################################
 
 # Import Pandas data analysis library.
@@ -11,6 +11,9 @@ import pandas as pd
 
 # Import matplotlib for 2D plotting.
 import matplotlib.pyplot as plt
+
+# Import Seaborn
+import seaborn as sb
 
 # Read the iris.csv file from this directory.
 data = pd.read_csv('iris.csv')
@@ -68,7 +71,7 @@ plt.show()
 # Plot all four histograms in one figure using subplot.
 # Edit legend for these small graphs.
 # Leave out some x and y axes titles to avoid crowding.
-plt.subplot(2,2,1)
+ 
 data.groupby('Name')['SepalLength'].hist(bins=10, alpha=0.5, stacked=True)
 plt.title('SepalLength', fontsize=12)
 #plt.xlabel('cm', fontsize=10)
@@ -108,4 +111,14 @@ from pandas.plotting import scatter_matrix
 
 pd.plotting.scatter_matrix(data, alpha=0.8)
 plt.savefig('ScatterMatrix_Pandas.jpeg')
+plt.show()
+
+# Try Seaborn swarmplot as a cooler way to investigate species differences.
+sb.set(style="whitegrid", palette="muted")
+
+# "Melt" the dataset to "long-form" or "tidy" representation
+iris = pd.melt(data, "Name", var_name="measurement")
+
+# Draw a categorical scatterplot to show each observation
+sb.swarmplot(x="measurement", y="value", hue="Name", palette=["r", "c", "y"], data=iris)
 plt.show()
