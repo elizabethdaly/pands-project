@@ -166,7 +166,7 @@ I started by asking if the variables for each class are well separated from each
 
 ![Histograms all attributes](Hist_4attributes.jpeg)
 
-I started by generating four seperate figures, but a single properly formatted figure with four subplots looks much better. From this plot it is clear that SepalLength and SepalWidth would not be good variables to look at if trying to separate the three species as the histograms for each species overlap significantly. However, the Iris setosa histograms for PetalLength and PetalWidth values seems to be well seperated from those of the other two species. So it would be possible to roughly assign an observation to class Iris setosa if given the values of these two variables.
+I started by generating four seperate figures, but a single properly formatted figure with four subplots looks much better. From this plot it is clear that SepalLength and SepalWidth would not be good variables to look at if trying to separate the three species as the histograms for each species overlap significantly. However, the Iris setosa histograms for PetalLength and PetalWidth values seem to be well seperated from those of the other two species. So it would be possible to roughly assign an observation to class Iris setosa if given the values of these two variables.
 
 ![Swarmplot](SwarmPlot.jpeg)
 
@@ -174,9 +174,10 @@ I came across a Seaborn swarmplot of the iris data set in the documentation. Com
 
 ## Other work <a name="paragraph5"></a>
 Python script: **variable-relations.py**
-I first tried **Pandas** scatter_matrix to examine if there is a linear correlation between any of the four variables. The R-bloggers website listed in the references gives a good simple explanation of what the scatter matrix means. Briefly, each variable is plotted against itself and all the others (here there are 4 x 4 = 16 subplots). If the data points look like they are tending to form a line (row 1 col 3 showing SepalLength vs PetalLength), then those two variables are probably correlated; if they don't (row 1 col 2 showing SepalLength vs SepalWidth), then there is less of a correlation. The diagonal subplots here are histograms of that variable. It would be nice to differentiate the classes (species) here; for that I think I need to use the Seaborn data visualization library. 
 
-![Pandas scatter matrix](ScatterMatrix_Pandas.jpeg)
+I first tried **Pandas** scatter_matrix to examine if there is a linear correlation between any of the four variables. It would be nice to differentiate the classes (species) here; for that I think I need to use the Seaborn data visualization library. The R-bloggers website listed in the references gives a good simple explanation of what the scatter matrix means. Briefly, each variable is plotted against itself and all the others (here there are 4 x 4 = 16 subplots). If the data points look like they are tending to form a line (row 1 col 3 showing SepalLength vs PetalLength), then those two variables are probably correlated; if they don't (row 1 col 2 showing SepalLength vs SepalWidth), then there is less of a correlation. The diagonal subplots here are histograms of that variable; they are identical to the histograms I've already plotted in the last section.
+
+![Pandas scatter matrix](ScatterMatrix_Seaborn.jpeg)
 
 plot sepal length vs width
 plot petal length vs width
