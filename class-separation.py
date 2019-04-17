@@ -71,7 +71,7 @@ plt.show()
 # Plot all four histograms in one figure using subplot.
 # Edit legend for these small graphs.
 # Leave out some x and y axes titles to avoid crowding.
- 
+plt.subplot(2,2,1)
 data.groupby('Name')['SepalLength'].hist(bins=10, alpha=0.5, stacked=True)
 plt.title('SepalLength', fontsize=12)
 #plt.xlabel('cm', fontsize=10)
@@ -105,20 +105,24 @@ plt.tight_layout()
 plt.savefig('Hist_4attributes.jpeg')
 plt.show()
 
-# Plot the scatter matrix to see how the variables are related - or not.
-# Needed this to avoid a FutureWarning related to location of plotting module.
-from pandas.plotting import scatter_matrix
-
-pd.plotting.scatter_matrix(data, alpha=0.8)
-plt.savefig('ScatterMatrix_Pandas.jpeg')
-plt.show()
-
 # Try Seaborn swarmplot as a cooler way to investigate species differences.
-sb.set(style="whitegrid", palette="muted")
 
-# "Melt" the dataset to "long-form" or "tidy" representation
+# Slightly modified from https://seaborn.pydata.org/examples/
+# scatterplot_categorical.html?highlight=iris%20swarmplot
+# style options are: darkgrid, whitegrid, dark, white, ticks
+# palette options are: deep, muted, bright, pastel, dark, colorblind
+sb.set(style="whitegrid", palette="pastel")
+
+
+# "Melt" the dataset to "long-form" or "tidy" representation.
+# Make "Name" the identifier variable and all other columns just measurements.
 iris = pd.melt(data, "Name", var_name="measurement")
 
-# Draw a categorical scatterplot to show each observation
-sb.swarmplot(x="measurement", y="value", hue="Name", palette=["r", "c", "y"], data=iris)
+# Draw a categorical scatterplot to show each observation.
+# Now plot measurements on y axis.
+# Each "Name" has a different colour.
+# Points are adjusted along categorical (x) axis so that they don't overlap. 
+# Each sepcies is coloured as in histograms above for easy comparison.
+sb.swarmplot(x="measurement", y="value", hue="Name", data=iris)
+plt.savefig('SwarmPlot.jpeg')
 plt.show()
