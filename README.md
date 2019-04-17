@@ -20,7 +20,12 @@ https://github.com/elizabethdaly/pands-project.git
     2. [Descriptive statistics of the full data set](#statsall)
 3. [Seperate the data into distinct species](#paragraph3)
 4. [Discriminating between species](#paragraph4)
-5. [Other work](#paragraph5)
+    1. [Histograms of variable values] (#histall)
+    2. [Swarmplot of variable values] (#swarmall)
+5. [Variable relationships](#paragraph5)
+    1. [Scatter matrix] (#scatter)
+    2. [Linear regression in Seaborn] (#linregSB)
+    3. [Least squares fitting] (#lsq)
 6. [Conclusion](#conclusion)
 6. [List of Python scripts](#scripts)
 7. [References](#references)
@@ -157,6 +162,8 @@ While researching the iris data set I found that there are lots of example analy
 The output of **class-separation.py** looks like:
 ![get-data.py output](class-separation_OP.JPG)
 
+### Histograms of variable values <a name="histall"></a>
+
 I started by asking if the variables for each class are well separated from each other? If they are, then it could be possible to predict which species a particular observation belongs to given a variable value. I plotted  histograms of each attribute for all three species at the same time using the **Pandas** groupby() and hist() functions. 
 * species = data.Name.unique() to store the unique values in DataFrame data['Name'] column.
 * .hist() kwargs alpha=0.5 (0.0 transparent through 1.0 opaque) to see overlapping histograms.
@@ -168,20 +175,31 @@ I started by asking if the variables for each class are well separated from each
 
 I started by generating four seperate figures, but a single properly formatted figure with four subplots looks much better. From this plot it is clear that SepalLength and SepalWidth would not be good variables to look at if trying to separate the three species as the histograms for each species overlap significantly. However, the Iris setosa histograms for PetalLength and PetalWidth values seem to be well seperated from those of the other two species. So it would be possible to roughly assign an observation to class Iris setosa if given the values of these two variables.
 
+### Swarmplot of variable values <a name="swarmall></a>
 ![Swarmplot](SwarmPlot.jpeg)
 
 I came across a Seaborn swarmplot of the iris data set in the package documentation. It offers a way to clearly plot all observations in a data set, as observations with the same value are seperated from each other - that's why the data above shows a spread along the x axis. There is a similar function called stripplot which does not do this, so the resulting plot is more crowded in x. This swarmplot also provides another good visual illustration of how Iris setosa is separated from the other two species when looking at PetalLength and PetalWidth variables. The colour palatte in the plot was set to be identical to that used for the histograms above, making it easy to recognise the different species. Comment.
 
-## Other work <a name="paragraph5"></a>
+## Variable relationships <a name="paragraph5"></a>
 Python script: **variable-relations.py**
 
-I first tried **Pandas** scatter_matrix to examine if there is a linear correlation between any of the four variables. The three species were indistinguishable in the resulting figure. It would be nice to differentiate the classes (species), for that I think I need to use the Seaborn data visualization library. The R-bloggers website listed in the references gives a good simple explanation of what the scatter matrix means. Briefly, each variable is plotted against itself and all the others (here there are 4 x 4 = 16 subplots). If the data points look like they are tending to form a line (row 1 col 3 showing SepalLength vs PetalLength), then those two variables are probably correlated; if they don't (row 1 col 2 showing SepalLength vs SepalWidth), then there is less of a correlation. Where two variables are correlated one could imagine being able to perform a good linear fit to the plot of one versus the other.The diagonal subplots here are histograms of that variable; they are identical to the histograms I've already plotted in the last section.
+### Scatter matrix <a name="scatter"></a>
 
-![Pandas scatter matrix](ScatterMatrix_Seaborn.jpeg)
+I first tried **Pandas** scatter_matrix to examine if there is a linear correlation between any of the four variables, but the three species were indistinguishable in the resulting figure. I need to use the Seaborn data visualization library in order to differentiate between classes (species). The R-bloggers website listed in the references gives a good simple explanation of what the scatter matrix means. Briefly, each variable is plotted against itself and all the others (here there are 4 x 4 = 16 subplots). If the data points look like they are tending to form a line (row 1 col 3 showing SepalLength vs PetalLength), then those two variables are probably correlated; if they don't (row 1 col 2 showing SepalLength vs SepalWidth), then there is less of a correlation. From this plot it looks as if PetalLength and PetalWidth are highly correlated for all species. Where two variables are correlated one could imagine being able to perform a good linear fit to the plot of one versus the other. The diagonal subplots here are histograms of that variable and are identical to the histograms I've already plotted in the last section. List some of keywords/options.
+* Seaborn pairplot parameter hue="Name"
+* Seaborn pairplot parameter diag_kind='hist'
 
-plot sepal length vs width
-plot petal length vs width
-Fitting
+![Seaborn scatter matrix](ScatterMatrix_Seaborn.jpeg)
+
+### Linear regression in Seaborn <a name="linregSB"></a>
+Explain some pars & not using hue kwd.
+Which subplots do these correspond to in scatter matrix.
+Line + shaded area around it = ? Fit parameters.
+![Seaborn lmplot Petal len v wid](PetalLvW_Seaborn.jpeg)
+![Seaborn lmplot Petal wid v len](PetalWvL_Seaborn.jpeg)
+
+### Least squares fitting] <a name="lsq"></a>
+
 
 ## Conclusion <a name="conclusion"></a>
 
@@ -213,3 +231,7 @@ Fitting
 19. Table of contents in markdown: https://stackoverflow.com/questions/11948245/markdown-to-create-pages-and-table-of-contents
 20. Simple explanation of scatter matrix: https://www.r-bloggers.com/scatterplot-matrices/
 21. Seaborn: https://seaborn.pydata.org/index.html
+22. Seaborn scatter matrix : https://seaborn.pydata.org/examples/scatterplot_matrix.html
+23. Linear regression: https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/r/iris_lm/
+24. Least squares fitting: https://stackoverflow.com/questions/19991445/run-an-ols-regression-with-pandas-data-frame
+25. Attemtpting subplots with Seaborn lmplot: https://stackoverflow.com/questions/23969619/plotting-with-seaborn-using-the-matplotlib-object-oriented-interface
