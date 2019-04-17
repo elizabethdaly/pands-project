@@ -20,12 +20,12 @@ https://github.com/elizabethdaly/pands-project.git
     2. [Descriptive statistics of the full data set](#statsall)
 3. [Seperate the data into distinct species](#paragraph3)
 4. [Discriminating between species](#paragraph4)
-    1. [Histograms of variable values] (#histall)
-    2. [Swarmplot of variable values] (#swarmall)
+    1. [Histograms of variable values](#histall)
+    2. [Swarmplot of variable values](#swarmall)
 5. [Variable relationships](#paragraph5)
-    1. [Scatter matrix] (#scatter)
-    2. [Linear regression in Seaborn] (#linregSB)
-    3. [Least squares fitting] (#lsq)
+    1. [Scatter matrix](#scatter)
+    2. [Linear regression in Seaborn](#linregSB)
+    3. [Least squares fitting](#lsq)
 6. [Conclusion](#conclusion)
 6. [List of Python scripts](#scripts)
 7. [References](#references)
@@ -175,7 +175,7 @@ I started by asking if the variables for each class are well separated from each
 
 I started by generating four seperate figures, but a single properly formatted figure with four subplots looks much better. From this plot it is clear that SepalLength and SepalWidth would not be good variables to look at if trying to separate the three species as the histograms for each species overlap significantly. However, the Iris setosa histograms for PetalLength and PetalWidth values seem to be well seperated from those of the other two species. So it would be possible to roughly assign an observation to class Iris setosa if given the values of these two variables.
 
-### Swarmplot of variable values <a name="swarmall></a>
+### Swarmplot of variable values <a name="swarmall"></a>
 ![Swarmplot](SwarmPlot.jpeg)
 
 I came across a Seaborn swarmplot of the iris data set in the package documentation. It offers a way to clearly plot all observations in a data set, as observations with the same value are seperated from each other - that's why the data above shows a spread along the x axis. There is a similar function called stripplot which does not do this, so the resulting plot is more crowded in x. This swarmplot also provides another good visual illustration of how Iris setosa is separated from the other two species when looking at PetalLength and PetalWidth variables. The colour palatte in the plot was set to be identical to that used for the histograms above, making it easy to recognise the different species. Comment.
@@ -198,7 +198,7 @@ Line + shaded area around it = ? Fit parameters.
 ![Seaborn lmplot Petal len v wid](PetalLvW_Seaborn.jpeg)
 ![Seaborn lmplot Petal wid v len](PetalWvL_Seaborn.jpeg)
 
-### Least squares fitting] <a name="lsq"></a>
+### Least squares fitting <a name="lsq"></a>
 
 
 ## Conclusion <a name="conclusion"></a>
