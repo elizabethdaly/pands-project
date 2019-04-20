@@ -66,4 +66,12 @@ g.set_axis_labels("PetalLength (mm)", "PetalWidth (mm)")
 plt.savefig('PetalWvL_Seaborn.jpeg')
 plt.show()
 
+# Do one with hue parameter set to show difference.
+g = sb.lmplot(x="PetalLength", y="PetalWidth", hue="Name", truncate=True, height=5, data=data)
+plt.title('PetalWidth vs PetalLength', fontsize=12)
+g.set_axis_labels("PetalLength (mm)", "PetalWidth (mm)")
+plt.savefig('Sep_PetalWvL_Seaborn.jpeg')
+plt.show()
+
 # ###########################################################
+
