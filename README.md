@@ -92,7 +92,7 @@ min | 4.300000 | 2.000000 | 1.000000 | 0.100000
 75% | 6.400000 | 3.300000 | 5.100000 | 1.800000
 max | 7.900000 | 4.400000 | 6.900000 | 2.500000
 
-Here, count is the number of observations, mean is the mean of the values, std is the standard deviation, and min (max) is the minimum (maximum) of the values. The standard deviation indicates the amount of spread in the values; if it is large then the values are spread over a wide range, while a small standard deviation means that the values are more tightly clustered around the mean. A quick glance at the table of results above shows that the values of SepalLength and  SepalWidth seem to cluster around the mean while the values of PetalLength and PetalWidth have a very large spread in values. 25%, 50%, and 75% are the 25th, 50th, and 75th percentiles respectively. The 50th percentile is equivalent to the median value of the observations. The 50% value is close to the mean for SepalWidth and SepalLength but not so for PetalLength and PetalWidth. Bear in mind that these summary statistics apply to all 150 observations rather than to each species seperately (_i.e._ to each set of 50 observations). In the bar plot of the dataframe, each column corresponds to a colour while each row is nested in a group on the x axis. I use **Pandas** .iloc to select the data I wish to display in the bar plot by using integer-location based indexing into the summary statistics dataframe.
+Here, count is the number of observations, mean is the mean of the values, std is the standard deviation, and min (max) is the minimum (maximum) of the values. The standard deviation indicates the amount of spread in the values; if it is large then the values are spread over a wide range, while a small standard deviation means that the values are more tightly clustered around the mean. A quick glance at the table of results above shows that the values of SepalLength and  SepalWidth seem to cluster around the mean while the values of PetalLength and PetalWidth have a very large spread in values. 25%, 50%, and 75% are the 25th, 50th, and 75th percentiles respectively. The 50th percentile is equivalent to the median value of the observations. The 50% value is close to the mean for SepalWidth and SepalLength but not so for PetalLength and PetalWidth. Bear in mind that these summary statistics apply to all 150 observations rather than to each species seperately (_i.e._ to each set of 50 observations). In the bar plot of the summary statistics dataframe, each column corresponds to a colour while each row is nested in a group on the x axis. I use **Pandas** .iloc to select the data I wish to display in the bar plot by using integer-location based indexing into the summary statistics dataframe.
 
 ![Summary statistics all species](SummaryStats.jpeg)
 
@@ -158,8 +158,8 @@ ends of the whiskers. The result is a very good visual summary of the data. Any 
 ## Discriminating between species <a name="paragraph4"></a>
 Python script: **class-separation.py**
 
-While researching the iris data set I found that there are lots of example analyses online; these include very simple ones which just describe the data set, to very complicated machine learning and LDA and PCA analyses. It seems to be commonly used to demonstrate classification problems such as how to seperate classes from each other and how to predict which class a sample belongs to if the class label for that sample is unknown. The classes here are the three species, there are 50 samples per class, with each sample consisting of four variables or attributes (SepalLength, SepalWidth, PetalLength, PetalWidth).
-The output of **class-separation.py** looks like:
+While researching the iris data set I found that there are lots of example analyses online ranging from very simple ones which just describe the data set, to very complicated machine learning and LDA and PCA analyses. It seems to be commonly used to demonstrate classification problems such as how to seperate classes from each other and how to predict which class a sample belongs to if the class label for that sample is unknown. The classes here are the three species, there are 50 samples per class, with each sample consisting of four variables or attributes (SepalLength, SepalWidth, PetalLength, PetalWidth).
+Part of the output of **class-separation.py** looks like:
 ![get-data.py output](class-separation_OP.JPG)
 
 ### Histograms of variable values <a name="histall"></a>
@@ -178,24 +178,31 @@ I started by generating four seperate figures, but a single properly formatted f
 ### Swarmplot of variable values <a name="swarmall"></a>
 ![Swarmplot](SwarmPlot.jpeg)
 
-I came across a Seaborn swarmplot of the iris data set in the package documentation. It offers a way to clearly plot all observations in a data set, as observations with the same value are seperated from each other - that's why the data above shows a spread along the x axis. There is a similar function called stripplot which does not do this, so the resulting plot is more crowded in x. This swarmplot also provides another good visual illustration of how Iris setosa is separated from the other two species when looking at PetalLength and PetalWidth variables. The colour palatte in the plot was set to be identical to that used for the histograms above, making it easy to recognise the different species. Comment.
+I came across a Seaborn swarmplot of the iris data set in the package documentation. It offers a way to clearly plot all observations in a data set, as observations with the same value are seperated from each other - that's why the data above shows a spread along the x axis. There is a similar function called stripplot which does not do this, so the resulting plot is more crowded in x. This swarmplot also provides another good visual illustration of how Iris setosa is separated from the other two species if one is looking at PetalLength and PetalWidth variables. The colour palatte in the plot was set to be identical to that used for the histograms above, making it easy to recognise the different species. Comment.
 
 ## Variable relationships <a name="paragraph5"></a>
 Python script: **variable-relations.py**
 
 ### Scatter matrix <a name="scatter"></a>
 
-I first tried **Pandas** scatter_matrix to examine if there is a linear correlation between any of the four variables, but the three species were indistinguishable in the resulting figure. I need to use the Seaborn data visualization library in order to differentiate between classes (species). The R-bloggers website listed in the references gives a good simple explanation of what the scatter matrix means. Briefly, each variable is plotted against itself and all the others (here there are 4 x 4 = 16 subplots). If the data points look like they are tending to form a line (row 1 col 3 showing SepalLength vs PetalLength), then those two variables are probably correlated; if they don't (row 1 col 2 showing SepalLength vs SepalWidth), then there is less of a correlation. From this plot it looks as if PetalLength and PetalWidth are highly correlated for all species. Where two variables are correlated one could imagine being able to perform a good linear fit to the plot of one versus the other. The diagonal subplots here are histograms of that variable and are identical to the histograms I've already plotted in the last section. List some of keywords/options.
-* Seaborn pairplot parameter hue="Name"
-* Seaborn pairplot parameter diag_kind='hist'
+I first tried **Pandas** scatter_matrix to examine if there is a linear correlation between any of the four variables, but the three species were indistinguishable in the resulting figure. I needed to use the Seaborn data visualization library in order to differentiate between classes (species), specifically **Seaborn** pairplot function. The R-bloggers website listed in the references below gives a good simple explanation of what the scatter matrix means. Briefly, each variable is plotted against itself and all the others (here there are four variable so 4 x 4 = 16 subplots). If the data points look like they are tending to form a line (row 1 col 3 showing SepalLength vs PetalLength), then those two variables are probably correlated; if they don't (row 1 col 2 showing SepalLength vs SepalWidth), then there is less of a correlation. From this plot it looks as if PetalLength and PetalWidth are highly correlated for all species. Where two variables are correlated one could imagine being able to perform a good linear fit to the plot of one versus the other. The diagonal subplots here are histograms of that variable and are identical to the histograms I've already plotted in the last section. Some of keywords/options used here with pairplot include:
+* Parameter hue="Name" means that each "Name" (species) is plotted using a different colour.
+* Parameter diag_kind='hist' means that the diagonal plots in the scatter matrix are histograms of variable values. These are identical to the histograms I've already plotted using Pandas.
+* I also set the palette="pastel" to continue the same colour theme I've been using up to now.
 
 ![Seaborn scatter matrix](ScatterMatrix_Seaborn.jpeg)
 
 ### Linear regression in Seaborn <a name="linregSB"></a>
+
+Looking at the scatter matrix, it's clear that some of the subplots show linear trends, _i.e._ the y data seems to depend linearly on the x data in some way. It's a stronger trend in some plots, for example, in row 3 column 4 of the scatter matrix with PetalLength (on y) vs PetalWidth (on x), and in row 4 column 4 with PetalWidth (on x) vs PetalLength (on y). So, I chose to examine the linear trend for these variables more closely using the **Seaborn** lmplot function. This generates a visualization of the linear fit by fitting the data to a line, plotting the resulting straight line, and also shaded region which represents the 95% confidence level for the fit. 
+
+
+lmplot doesn't, however, provide the actual fit parameters, just a visualization of it. To find fitting parameters I would need to use a statistical package such as **statsmodels** as recommended in the Seaborn documentation. 
+
 Explain some pars & not using hue kwd.
-Which subplots do these correspond to in scatter matrix.
-Line + shaded area around it = ? Fit parameters.
+
 ![Seaborn lmplot Petal len v wid](PetalLvW_Seaborn.jpeg)
+
 ![Seaborn lmplot Petal wid v len](PetalWvL_Seaborn.jpeg)
 
 ### Least squares fitting <a name="lsq"></a>
@@ -234,4 +241,6 @@ Line + shaded area around it = ? Fit parameters.
 22. Seaborn scatter matrix : https://seaborn.pydata.org/examples/scatterplot_matrix.html
 23. Linear regression: https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/r/iris_lm/
 24. Least squares fitting: https://stackoverflow.com/questions/19991445/run-an-ols-regression-with-pandas-data-frame
-25. Attemtpting subplots with Seaborn lmplot: https://stackoverflow.com/questions/23969619/plotting-with-seaborn-using-the-matplotlib-object-oriented-interface
+25. Linear relationships in Seaborn: https://seaborn.pydata.org/tutorial/regression.html?highlight=linear%20regression
+26. Seaborn lmplot: https://seaborn.pydata.org/examples/multiple_regression.html?highlight=iris%20data%20set
+27. Attempting subplots with Seaborn lmplot: https://stackoverflow.com/questions/23969619/plotting-with-seaborn-using-the-matplotlib-object-oriented-interface
