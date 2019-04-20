@@ -15,14 +15,14 @@ https://github.com/elizabethdaly/pands-project.git
     1. [Ronald Fisher](#introRF)
     2. [Exploratory data analysis](#EDA)
     3. [Description of the data set](#datadescription)
-2. [Full data set initial analysis](#paragraph2)
+2. [Initial analysis of the full data set](#paragraph2)
     1. [Plotting the full data set](#plotall)
     2. [Descriptive statistics of the full data set](#statsall)
 3. [Seperate the data into distinct species](#paragraph3)
 4. [Discriminating between species](#paragraph4)
     1. [Histograms of variable values](#histall)
     2. [Swarmplot of variable values](#swarmall)
-5. [Variable relationships](#paragraph5)
+5. [Relationships between variables](#paragraph5)
     1. [Scatter matrix](#scatter)
     2. [Linear regression in Seaborn](#linregSB)
     3. [Least squares fitting](#lsq)
@@ -44,7 +44,7 @@ _Data Analysis refers to the critical process of performing initial investigatio
 ### Description of the data set <a name="datadescription"></a>
 Fisher's (or Anderson's) iris data set is a multivariate data set as each observation/sample consists of four variables. It contains the measurements in centimetres of the variables sepal length, sepal width, petal length, and petal width (in that order) for 50 flowers from each of three species of iris. The species are _Iris setosa_, _Iris versicolor_, and _Iris virginica_. The data set consists of 150 rows or observations (50 samples from each species) by five columns. The first four columns contain the samples/measurements and the fifth contains the species name (or class). I obtained the data set as a csv file from GitHub as detailed below.
 
-##  Full data set initial analysis <a name="paragraph2"></a>
+##  Initial analysis of the full data set <a name="paragraph2"></a>
 Python script: **get-data.py** 
 
 This script reads the csv file containing the data set **iris.csv** (located in the same directory) and does some basic analysis. I import the modules I need for data analysis and plotting: Pandas, NumPy and matplotlib. The csv file is then read into a DataFrame - the basic data format for Pandas. Each row of a DataFrame represents a sample of data, with each column containing a different variable; the format is therefore compatible with the Iris Data Set we are investigating for this project. I use various **Pandas** functions as follows:
@@ -180,7 +180,7 @@ I started by generating four seperate figures, but a single properly formatted f
 
 I came across a Seaborn swarmplot of the iris data set in the package documentation. It offers a way to clearly plot all observations in a data set, as observations with the same value are seperated from each other - that's why the data above shows a spread along the x axis. There is a similar function called stripplot which does not do this, so the resulting plot is more crowded in x. This swarmplot also provides another good visual illustration of how Iris setosa is separated from the other two species if one is looking at PetalLength and PetalWidth variables. The colour palatte in the plot was set to be identical to that used for the histograms above, making it easy to recognise the different species. Comment.
 
-## Variable relationships <a name="paragraph5"></a>
+## Relationships between variables <a name="paragraph5"></a>
 Python script: **variable-relations.py**
 
 ### Scatter matrix <a name="scatter"></a>
@@ -194,19 +194,20 @@ I first tried **Pandas** scatter_matrix to examine if there is a linear correlat
 
 ### Linear regression in Seaborn <a name="linregSB"></a>
 
-Looking at the scatter matrix, it's clear that some of the subplots show linear trends, _i.e._ the y data seems to depend linearly on the x data in some way. It's a stronger trend in some plots, for example, in row 3 column 4 of the scatter matrix with PetalLength (on y) vs PetalWidth (on x), and in row 4 column 4 with PetalWidth (on x) vs PetalLength (on y). So, I chose to examine the linear trend for these variables more closely using the **Seaborn** lmplot function. This generates a visualization of the linear fit by fitting the data to a line, plotting the resulting straight line, and also shaded region which represents the 95% confidence level for the fit. 
-
-
-lmplot doesn't, however, provide the actual fit parameters, just a visualization of it. To find fitting parameters I would need to use a statistical package such as **statsmodels** as recommended in the Seaborn documentation. 
-
-Explain some pars & not using hue kwd.
+Looking at the scatter matrix, it's clear that some of the subplots show linear trends, _i.e._ the y data seems to depend linearly on the x data in some way. It's a stronger trend in some plots, for example, in row 3 column 4 of the scatter matrix with PetalLength (on y) vs PetalWidth (on x), and in row 4 column 4 with PetalWidth (on x) vs PetalLength (on y). So, I chose to examine the linear trend for these variables more closely using the **Seaborn** lmplot function. This generates a visualization of the linear fit by fitting the data to a line, plotting the resulting straight line, and also a shaded region which represents the 95% confidence level for the fit. I decided to fit all of the data to a single line (I did not use the hue="Name" parameter in lmplot to seperate the three species) because I think the result is visually much nicer, see below. Some lmplot options used here include:
+* x="PetalWidth", y="PetalLength" to set the date to plot/fit.
+* truncate=True to stop the line at limits of data rather than x axis limits.
+* height=4, a sizing parameter for the plot used with aspect ratio (=1 by default).
 
 ![Seaborn lmplot Petal len v wid](PetalLvW_Seaborn.jpeg)
 
 ![Seaborn lmplot Petal wid v len](PetalWvL_Seaborn.jpeg)
 
+![Seaborn lmplot Petal wid v len with hue](Sep_PetalWvL_Seaborn.jpeg)
+
 ### Least squares fitting <a name="lsq"></a>
 
+**Seaborn** lmplot does not provide the actual fit parameters, just a visualization of the fit. To find fitting parameters I would need to use a statistical package such as **statsmodels** as recommended in the Seaborn documentation.
 
 ## Conclusion <a name="conclusion"></a>
 
