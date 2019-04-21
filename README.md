@@ -19,13 +19,15 @@ https://github.com/elizabethdaly/pands-project.git
     1. [Plotting the full data set](#plotall)
     2. [Descriptive statistics of the full data set](#statsall)
 3. [Seperate the data into distinct species](#paragraph3)
+    1. [Summary statistics for each species](#statsperspecies)
+    2. [Boxplots](#boxp)
 4. [Discriminating between species](#paragraph4)
     1. [Histograms of variable values](#histall)
     2. [Swarmplot of variable values](#swarmall)
 5. [Relationships between variables](#paragraph5)
     1. [Scatter matrix](#scatter)
     2. [Linear regression in Seaborn](#linregSB)
-    3. [Least squares fitting](#lsq)
+    3. [Least squares fitting using statsmodels](#lsq)
 6. [Work done by other people](#others)
 7. [Conclusion](#conclusion)
 8. [List of Python scripts](#scripts)
@@ -101,6 +103,8 @@ Here, count is the number of observations, mean is the mean of the values, std i
 
 Python script: **stats-per-species.py** 
 
+### Summary statistics for each species <a name="statsperspecies"></a>
+
 I used this script to investigate the basic properties of the data set on a per species basis. I use **Pandas** .loc() to select groups of rows and columns based on labels. For example, all rows with the label "Name = Iris-setosa" are extracted from the master data set and read into a new DataFrame of size (50,5): 50 rows (observations) and 5 columns (variables) with labels SepalLength etc as above. The summary statistics of each species are then found and are displayed below. It is also possible to investigate some statistical properties of the data set without breaking it into seperate DataFrames for each species. This is done using **Pandas** groupby to select sampes based on (species) Name. Some of the Python commamds used here include:
 * setosa = data.loc[data['Name'] == "Iris-setosa"] to select a subset of data based on class.
 * setosa_summary.loc[['mean', 'std', '50%']].plot.bar() to select part of a DataFrame for plotting.
@@ -145,6 +149,8 @@ Iris-versicolor | 0.516171 | 0.313798 | 0.469911 | 0.197753
 Iris-virginica  | 0.635880 | 0.322497 | 0.551895 | 0.274650
 
 ![Std values for each species](Std_species.jpeg)
+
+### Boxplots <a name="boxp"></a>
 
 I later realsied that I could investigate the distribution of variables using **Matplotlib**
 boxplot, which makes a box and whisker plot for each column of the DataFrame. The box extends 
@@ -204,13 +210,28 @@ Looking at the scatter matrix, it's clear that some of the subplots show linear 
 
 ![Seaborn lmplot Petal wid v len with hue](Sep_PetalWvL_Seaborn.jpeg)
 
-### Least squares fitting <a name="lsq"></a>
+### Least squares fitting using statsmodels <a name="lsq"></a>
 
-**Seaborn** lmplot provides a visualization of the linear fit but does not not provide the actual fitting parameters. To find those the Seaborn documentation recommends using a statistical package such as **statsmodels**. 
+**Seaborn** lmplot provides a visualization of the linear fit but does not not provide the actual fitting parameters. To find those, the Seaborn documentation recommends using a statistical package such as **statsmodels**. I used the package to fit a straight line (with slope and intercept) to the data (PetalWidth on y versus PetalLength on x ) via simple least squares fitting. The method works by minimizing the sum of the squares of the residuals, the residual being the difference between the real data and the fit calculated at each value of x. **Statsmodels** OLS is a simple ordinary least squares method which does not include a constant (intercept); that must be added to the model using the add_constant option. It is used in the form OLS(y, X). I performed the fit and then plotted the fit on top of the data to show that it works. It's clear that the fit looks better when an intercept is used, although the goodness of the fit (R squared value) is slightly higher for the fit performed without an intercept. R squared can have values between 0 (the linear model cannot explian the observed data at all) and 1 (the linear model fits the observed data perfectly). Some of the settings and options used here include:
+
+* OLS(data['PetalWidth'], data['PetalLength']).fit() for the simple fit.
+* OLS(data['PetalWidth'], sm.add_constant(data['PetalLength'])).fit() to include intercept.
+* model.params to access the fitting parameters.
+* model.rsquared to access the goodness of fit measure.
+* PW_fit = x * model.params.PetalLength + model.params.const to plot the fit.
+
+The output from this part of the script contains a lot of information, although I am only interested in the fit paramaters and R squared value. These are:
+
+FIT  | m | c | R squared 
+-----|---|---|----------
+y = mx     | 0.3364 | - | 0.967
+y = mx + c | 0.4164 |-0.3665 | 0.927
+
+![OLSfit with intercept](OLSfit.JPG)
 
 ![OLS fit to Petal wid v len](OLSfit_PWvL.jpeg)
 
-## Work done by other people] < a name="others"></a>
+## Work done by other people < a name="others"></a>
 
 ## Conclusion <a name="conclusion"></a>
 
@@ -250,3 +271,4 @@ Looking at the scatter matrix, it's clear that some of the subplots show linear 
 27. Attempting subplots with Seaborn lmplot: https://stackoverflow.com/questions/23969619/plotting-with-seaborn-using-the-matplotlib-object-oriented-interface
 28. Regression using Statsmodels: https://www.statsmodels.org/stable/regression.html
 29. Least Squares Fitting on a Pandas DataFrame: https://stackoverflow.com/questions/19991445/run-an-ols-regression-with-pandas-data-frame
+30. Statsmodels OLS: https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html#statsmodels.regression.linear_model.OLS
