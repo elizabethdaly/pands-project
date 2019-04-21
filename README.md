@@ -231,7 +231,7 @@ y = mx + c | 0.4164 |-0.3665 | 0.927
 
 ![OLS fit to Petal wid v len](OLSfit_PWvL.jpeg)
 
-## Work done by other people < a name="others"></a>
+## Work done by other people <a name="others"></a>
 
 ## Conclusion <a name="conclusion"></a>
 
