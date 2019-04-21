@@ -12,6 +12,9 @@ import pandas as pd
 # Import matplotlib for 2D plotting.
 import matplotlib.pyplot as plt
 
+# Import Numpy
+import numpy as np
+
 # Import Seaborn
 import seaborn as sb
 
@@ -63,15 +66,55 @@ plt.show()
 g = sb.lmplot(x="PetalLength", y="PetalWidth", truncate=True, height=5, data=data)
 plt.title('PetalWidth vs PetalLength', fontsize=12)
 g.set_axis_labels("PetalLength (mm)", "PetalWidth (mm)")
-plt.savefig('PetalWvL_Seaborn.jpeg')
+#plt.savefig('PetalWvL_Seaborn.jpeg')
 plt.show()
 
 # Do one with hue parameter set to show difference.
 g = sb.lmplot(x="PetalLength", y="PetalWidth", hue="Name", truncate=True, height=5, data=data)
-plt.title('PetalWidth vs PetalLength', fontsize=12)
+plt.title('PetalWidth vs PetalLength fn(species)', fontsize=12)
 g.set_axis_labels("PetalLength (mm)", "PetalWidth (mm)")
 plt.savefig('Sep_PetalWvL_Seaborn.jpeg')
 plt.show()
 
 # ###########################################################
+# Try some LSQ fitting using the statsmodels package.
+# model=OLS, method=fit OLS=Ordinary Least Squares
+# model = sm.OLS(y, X)
+
+#import statsmodels.api as sm
+import statsmodels.api as sm
+
+# Ordinary least squares regression: y = m*x
+model_Simple = sm.OLS(data['PetalWidth'], data['PetalLength']).fit()
+print("Fit pars: ", model_Simple.params)
+print("R2 : ", model_Simple.rsquared)
+print(model_Simple.summary())
+
+# Add a constant term to OLS fit: y = m*x + c
+model = sm.OLS(data['PetalWidth'], sm.add_constant(data['PetalLength'])).fit()
+print("Fit pars: ", model.params)
+print("R2: ", model.rsquared)
+print("Fit summary: ", model.summary())
+
+# Calculate best fit line using the fitting parameters, for a range of integar x values.
+xmax = np.ceil((max(data['PetalLength'])))
+x = np.arange(0, xmax + 1, 1)
+PW_fitSimple = x * model_Simple.params.PetalLength
+PW_fit = x * model.params.PetalLength + model.params.const
+
+# Plot the data and fit together.
+plt.plot(data['PetalLength'], data['PetalWidth'], 'bo')
+plt.plot(x, PW_fitSimple, 'g-')
+plt.plot(x, PW_fit, 'r')
+plt.xticks(x)
+plt.grid(b=True, which='major', axis='both')
+plt.title("OLS fit Petal Width vs Length", fontsize=18)
+plt.ylabel('Petal Width (cm)', fontsize=16)
+plt.xlabel('Petal Length (cm)', fontsize=16)
+plt.legend(('Data', 'Simple fit', 'Fit'))
+
+# Save the figure.
+plt.savefig('OLSfit_PWvL.jpeg')
+plt.show()
+
 
