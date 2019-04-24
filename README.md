@@ -132,7 +132,7 @@ I used this script to investigate the basic properties of the data set on a per 
 ![Summary statistics Iris-versicolor](VersicolorStats.jpeg)
 ![Summary statistics Iris-virginica](VirginicaStats.jpeg)
 
-Another way to look at the statistics per species is to use **Pandas** groupby() to group the data according to species name and obtain statistics about each variable.
+Another way to look at the statistics per species is to use **Pandas groupby()** to group the data according to species name and obtain statistics about each variable.
 
 Mean(cm)  | SepalLength | SepalWidth | PetalLength | PetalWidth
 ----------|-------------|------------|-------------|------------
@@ -180,7 +180,7 @@ I started by asking if the variables for each class are well separated from each
 
 ![Histograms all attributes](Hist_4attributes.jpeg)
 
-I started by generating four seperate figures, but a single, properly-formatted figure, with four subplots, looks much better. From this plot it is clear that SepalLength and SepalWidth would not be good variables to look at if trying to separate the three species as the histograms for each species overlap significantly. However, the Iris setosa histograms for PetalLength and PetalWidth values seem to be well seperated from those of the other two species. So, it would be possible to roughly assign an observation to class Iris setosa if given the values of these two variables.
+I originally generated four seperate figures, but a single, properly-formatted figure, with four subplots, looks much better. From this plot it is clear that SepalLength and SepalWidth would not be good variables to look at if trying to separate the three species as the histograms for each species overlap significantly. However, the Iris setosa histograms for PetalLength and PetalWidth values seem to be well seperated from those of the other two species. So, it would be possible to roughly assign an observation to class Iris setosa if given the values of these two variables.
 
 ### Swarmplot of variable values <a name="swarmall"></a>
 ![Swarmplot](SwarmPlot.jpeg)
@@ -212,7 +212,7 @@ Looking at the scatter matrix, it's clear that some of the subplots show linear 
 
 ### Least squares fitting using statsmodels <a name="lsq"></a>
 
-**Seaborn** lmplot provides a visualization of the linear fit but does not not provide the actual fitting parameters. To find those, the Seaborn documentation recommends using a statistical package such as **statsmodels**. I used the package to fit a straight line (with slope and intercept) to the data (PetalWidth on y versus PetalLength on x ) via simple least squares fitting. This method works by minimizing the sum of the squares of the residuals, the residual being the difference between the real data and the fit calculated at each value of x. **Statsmodels OLS** is a simple ordinary least squares method which does not include a constant (intercept); that must be added to the model using the **add_constant** option. It is used in the form OLS(y, X). I performed the fit and then plotted the fit on top of the data to show that it works. I think that the fit looks better when an intercept is used, although the goodness of the fit (as represented by the R-squared value) is marginally higher for the fit performed without an intercept. That's probably just down to this particular plot where the intercept is almost zero anyway. R-squared can vary between 0 (the linear model cannot explian the observed data at all) and 1 (the linear model fits the observed data perfectly). Some of the settings and options used here include:
+**Seaborn lmplot** provides a visualization of the linear fit but does not not provide the actual fitting parameters. To find those, the Seaborn documentation recommends using a statistical package such as **statsmodels**. I used the package to fit a straight line (with slope and intercept) to the data (PetalWidth on y versus PetalLength on x ) via simple least squares fitting. This method works by minimizing the sum of the squares of the residuals, the residual being the difference between the real data and the fit calculated at each value of x. **Statsmodels OLS** is a simple ordinary least squares method which does not include a constant (intercept); that must be added to the model using the **add_constant** option. It is used in the form OLS(y, X). I performed the fit and then plotted the fit on top of the data to show that it works. I think that the fit looks better when an intercept is used, although the goodness of the fit (as represented by the R-squared value) is marginally higher for the fit performed without an intercept. That's probably just down to this particular plot where the intercept is almost zero anyway. R-squared can vary between 0 (the linear model cannot explian the observed data at all) and 1 (the linear model fits the observed data perfectly). Some of the settings and options used here include:
 
 * OLS(data['PetalWidth'], data['PetalLength']).fit() for the simple fit.
 * OLS(data['PetalWidth'], sm.add_constant(data['PetalLength'])).fit() to include intercept.
@@ -231,9 +231,11 @@ y = mx + c | 0.4164 |-0.3665 | 0.927
 
 ![OLS fit to Petal wid v len](OLSfit_PWvL.jpeg)
 
-## Work done by other people on the Iris data set <a name="others"></a>
+## Work done by other people on the Iris data set <a name="others"></a>  
 
 ## Conclusion <a name="conclusion"></a>
+
+The Iris data set is a classic multivariate data set containing 150 observations of four variables - sepal length, sepal width, petal length, and petal width - for three species of iris: setosa, versicolor, and virginica. There are 50 observations for each species (or class). With **get-data.py** I read in the data set and plotted the observations along with some descriptive statistics such as mean and standard deviation. Using the script **stats-per-species.py** I began to look at how the three species behaved individually. I initially investigated the statistics per species by breaking the data set into three DataFrames, one for each species. As I learned more about Pandas, I realised that some of this could have been done using functions on the full data set, such as **Pandas groupby()**, which allows for selection of parts of a DataFrame by class label. In **class-separation.py** I wanted to investigate if it was possible to separate the species from each other based on histograms and a **Seaborn swarmplot** of the four variables; I concluded that it was possible, for some species and some variables. I then looked at relationships between the variables in **variable-relations.py**. The starting point here was a scatter matrix to see if any of the variables (when plotted against the others) seemed to form patterns. Based on the scatter matrix, where it looked as if some variables could be linearly related to each other, I chose some variables to investigate further. I performed linear regression visually with **Seaborn** and again with **statsmodels** in order to find the actual fitting parameters.  
 
 ## List of Python scripts <a name="scripts"></a>
 * **iris.csv** Iris Data Set in same directory/repository
@@ -250,26 +252,27 @@ y = mx + c | 0.4164 |-0.3665 | 0.927
 5. MathWorks: https://uk.mathworks.com/help/stats/examples/classification.html
 6. Wolfram Data Repository: https://datarepository.wolframcloud.com/resources/Sample-Data-Fishers-Irises
 7. Iris data set: https://github.com/pandas-dev/pandas/blob/master/pandas/tests/data/iris.csv
-8. pandas Python data analysis library: https://pandas.pydata.org/
-9. matplotlib Python 2D plotting library: https://matplotlib.org/
+8. Pandas Python data analysis library: https://pandas.pydata.org/
+9. Matplotlib Python 2D plotting library: https://matplotlib.org/
 10. Pandas DataFrames: https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/
 11. Plotting examples: http://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
 12. Examples of working with DataFrames: https://tomaugspurger.github.io/modern-1-intro.html
 13. Typical data analyses: https://machinelearningmastery.com/quick-and-dirty-data-analysis-with-pandas/
 14. Visualising data with Python: https://www.analyticsvidhya.com/blog/2015/05/data-visualization-python/
-15. The iris data set in scikit-learn: https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
-16. Scikit-learn iris data set analyses: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html
-17. Image of iris species: https://medium.com/@pranav_suresh/iris-classification-using-logistic-regression-using-octave-873bca96ec5b
-18. Idea (but not the code) for histograms of attributes for three species at same time: https://stackoverflow.com/questions/45721083/unable-to-plot-4-histograms-of-iris-dataset-features-using-matplotlib
-19. Table of contents in markdown: https://stackoverflow.com/questions/11948245/markdown-to-create-pages-and-table-of-contents
-20. Simple explanation of scatter matrix: https://www.r-bloggers.com/scatterplot-matrices/
-21. Seaborn: https://seaborn.pydata.org/index.html
-22. Seaborn scatter matrix : https://seaborn.pydata.org/examples/scatterplot_matrix.html
-23. Linear regression: https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/r/iris_lm/
-24. Least squares fitting: https://stackoverflow.com/questions/19991445/run-an-ols-regression-with-pandas-data-frame
-25. Linear relationships in Seaborn: https://seaborn.pydata.org/tutorial/regression.html?highlight=linear%20regression
-26. Seaborn lmplot: https://seaborn.pydata.org/examples/multiple_regression.html?highlight=iris%20data%20set
-27. Attempting subplots with Seaborn lmplot: https://stackoverflow.com/questions/23969619/plotting-with-seaborn-using-the-matplotlib-object-oriented-interface
-28. Regression using Statsmodels: https://www.statsmodels.org/stable/regression.html
-29. Least Squares Fitting on a Pandas DataFrame: https://stackoverflow.com/questions/19991445/run-an-ols-regression-with-pandas-data-frame
-30. Statsmodels OLS: https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html#statsmodels.regression.linear_model.OLS
+15. Iris data set for machine learning (not package documentation): https://rajritvikblog.wordpress.com/2017/06/29/iris-dataset-analysis-python/
+16. The iris data set in scikit-learn: https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
+17. Scikit-learn iris data set analyses: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html
+18. Image of iris species: https://medium.com/@pranav_suresh/iris-classification-using-logistic-regression-using-octave-873bca96ec5b
+19. Idea (but not the code) for histograms of attributes for three species at same time: https://stackoverflow.com/questions/45721083/unable-to-plot-4-histograms-of-iris-dataset-features-using-matplotlib
+20. Table of contents in markdown: https://stackoverflow.com/questions/11948245/markdown-to-create-pages-and-table-of-contents
+21. Simple explanation of scatter matrix: https://www.r-bloggers.com/scatterplot-matrices/
+22. Seaborn: https://seaborn.pydata.org/index.html
+23. Seaborn scatter matrix : https://seaborn.pydata.org/examples/scatterplot_matrix.html
+24. Linear regression: https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/r/iris_lm/
+25. Least squares fitting: https://stackoverflow.com/questions/19991445/run-an-ols-regression-with-pandas-data-frame
+26. Linear relationships in Seaborn: https://seaborn.pydata.org/tutorial/regression.html?highlight=linear%20regression
+27. Seaborn lmplot: https://seaborn.pydata.org/examples/multiple_regression.html?highlight=iris%20data%20set
+28. Attempting subplots with Seaborn lmplot: https://stackoverflow.com/questions/23969619/plotting-with-seaborn-using-the-matplotlib-object-oriented-interface
+29. Regression using Statsmodels: https://www.statsmodels.org/stable/regression.html
+30. Least Squares Fitting on a Pandas DataFrame: https://stackoverflow.com/questions/19991445/run-an-ols-regression-with-pandas-data-frame
+31. Statsmodels OLS: https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html#statsmodels.regression.linear_model.OLS
