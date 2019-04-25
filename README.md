@@ -244,6 +244,9 @@ Python script: **machine-learning.py**
 
 The code for performing LDA on the Iris data set was taken directly from the scikit-learn documentation referenced below. I left out the code to perform Principal Components Analysis and added some extra commands to allow me to figure out what was going on in the script. First I tried opening the csv file containing the data set via Pandas (as I have done in all scripts so far), but I ran into problems when trying to plot the results graph. In the end I decided to use the scikit-learn code as given and try to understand what it was doing. 
 
+![LDA from Iris 2cmpts](LDA_iris.jpeg)
+
+![LDA from Sebastian Raschka](LDA_fromSRaschka.JPG)
 
 
 
