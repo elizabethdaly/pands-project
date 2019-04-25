@@ -29,6 +29,7 @@ https://github.com/elizabethdaly/pands-project.git
     2. [Linear regression in Seaborn](#linregSB)
     3. [Least squares fitting using statsmodels](#lsq)
 6. [Work done by other people on the Iris data set](#others)
+    1. [Machine learning](#machinelearning)
 7. [Conclusion](#conclusion)
 8. [List of Python scripts](#scripts)
 9. [References](#references)
@@ -233,9 +234,15 @@ y = mx + c | 0.4164 |-0.3665 | 0.927
 
 ## Work done by other people on the Iris data set <a name="others"></a>  
 
+### Machine learning <a name="machinelearning"></a>
+
+When I first started researching the Iris data set I found lots of analyses online, and to be honest, I didn't really know where to start as they seemed to quickly get complex. The data set seems to be a very popular one to use for demonstrating the concept of machine learning, especially in the documentation for various packages like Matlab, Mathematica, Pandas, and Scikit-learn (all in the reference list below). In order to do machine learning, the data must first be summarized and visualized, so that is where I chose to start, so that I could learn how to use Pandas. The rajritvikblog blog post below is a typical example of how these analyses proceed. The data is read in and the author plots each variable seperately (univariate plots), before moving on to look at how the variables interact with each other (multvariate plots). That is roughly the approach I took with my Python scripts. For machine learning itself, scikit-learn seems to be the goto package, and there are lots of examples related to machine learning using the Iris data set in the sci-kit.learn package documentation. Machine learning involves using the data you already have to make predictions about new data. It looks for patterns in data and roughly falls into two categories: supervised and unsupervised machine learning. Supervised machine learning uses a known training data set (such as the Iris data set with known labels/classes) to build a model that can be using to predict which class a new observation (with no lables) belongs to. The sci-kit.learn documentation describes the Iris data set as a "classic and very easy multi-class classification dataset". The author in the rajritvikblog blog post splits the data set in two, using 85% to train the models and 15% to check their accuracy. They compare six models and produce a single number for each which is a measure of model accuracy. One of the models studied is based on linear discriminant analysis (LDA), which, you may recall, was introduced by Fisher along with his Iris flower data set in 1936. LDA is only appropriate to use if the classes (species) are well separated by lines on a plot of one variable versus another. The best variables to use for this can be chosen by looking at the scatter matrix, for example. 
+
 ## Conclusion <a name="conclusion"></a>
 
-The Iris data set is a classic multivariate data set containing 150 observations of four variables - sepal length, sepal width, petal length, and petal width - for three species of iris: setosa, versicolor, and virginica. There are 50 observations for each species (or class). With **get-data.py** I read in the data set and plotted the observations along with some descriptive statistics such as mean and standard deviation. Using the script **stats-per-species.py** I began to look at how the three species behaved individually. I initially investigated the statistics per species by breaking the data set into three DataFrames, one for each species. As I learned more about Pandas, I realised that some of this could have been done using functions on the full data set, such as **Pandas groupby()**, which allows for selection of parts of a DataFrame by class label. In **class-separation.py** I wanted to investigate if it was possible to separate the species from each other based on histograms and a **Seaborn swarmplot** of the four variables; I concluded that it was possible, for some species and some variables. I then looked at relationships between the variables in **variable-relations.py**. The starting point here was a scatter matrix to see if any of the variables (when plotted against the others) seemed to form patterns. Based on the scatter matrix, where it looked as if some variables could be linearly related to each other, I chose some variables to investigate further. I performed linear regression visually with **Seaborn** and again with **statsmodels** in order to find the actual fitting parameters.  
+The Iris data set is a classic multivariate data set containing 150 observations of four variables - sepal length, sepal width, petal length, and petal width - for three species of iris: setosa, versicolor, and virginica. There are 50 observations for each species (or class). With **get-data.py** I read in the data set and plotted the observations along with some descriptive statistics such as the mean and standard deviation. Using the script **stats-per-species.py** I began to look at how the three species behaved individually. I initially investigated the statistics per species by breaking the data set into three DataFrames, one for each species. As I learned more about Pandas, I realised that some of this could have been done using functions on the full data set, such as **Pandas groupby()**, which allows for selection of parts of a DataFrame by class label. In **class-separation.py** I wanted to investigate if it was possible to separate the species from each other based on histograms and a **Seaborn swarmplot** of the four variables; I concluded that it was possible, for some species and some variables. I then looked at relationships between the variables in **variable-relations.py**. The starting point here was a scatter matrix to see if any of the variables (when plotted against the others) seemed to form patterns. Based on the scatter matrix, where it looked as if some variables could be linearly related to each other, I chose some variables to investigate further. I performed linear regression visually with **Seaborn** and again with **statsmodels** in order to find the actual fitting parameters. I found that there is a very good linear correlation between PetalWidth and PetalLength for example. 
+
+see ref 36 for good explanation and better code to run.
 
 ## List of Python scripts <a name="scripts"></a>
 * **iris.csv** Iris Data Set in same directory/repository
@@ -249,7 +256,7 @@ The Iris data set is a classic multivariate data set containing 150 observations
 2. Sir Ronald Fisher: https://study.com/academy/lesson/sir-ronald-fisher-biography-contributions-to-statistics.html
 3. Linear Discriminant Analysis: https://sebastianraschka.com/Articles/2014_python_lda.html
 4. Exploratory Data Analysis: https://towardsdatascience.com/exploratory-data-analysis-8fc1cb20fd15
-5. MathWorks: https://uk.mathworks.com/help/stats/examples/classification.html
+5. Classification with MathWorks: https://uk.mathworks.com/help/stats/examples/classification.html
 6. Wolfram Data Repository: https://datarepository.wolframcloud.com/resources/Sample-Data-Fishers-Irises
 7. Iris data set: https://github.com/pandas-dev/pandas/blob/master/pandas/tests/data/iris.csv
 8. Pandas Python data analysis library: https://pandas.pydata.org/
@@ -276,3 +283,8 @@ The Iris data set is a classic multivariate data set containing 150 observations
 29. Regression using Statsmodels: https://www.statsmodels.org/stable/regression.html
 30. Least Squares Fitting on a Pandas DataFrame: https://stackoverflow.com/questions/19991445/run-an-ols-regression-with-pandas-data-frame
 31. Statsmodels OLS: https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html#statsmodels.regression.linear_model.OLS
+32. Machine learning simple explanation: https://news.codecademy.com/what-is-machine-learning/
+33. Machine learning techniques: https://medium.com/datadriveninvestor/contemporary-classification-of-machine-learning-techniques-part-1-16e77eaa993e
+34. Machine learning tutorial: https://scikit-learn.org/stable/tutorial/basic/tutorial.html
+35. LDA using Iris data set: https://stackabuse.com/implementing-lda-in-python-with-scikit-learn/
+36. LDA on Iris via Python: http://sebastianraschka.com/Articles/2014_python_lda.html
