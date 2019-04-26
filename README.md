@@ -243,20 +243,34 @@ When I first started researching the Iris data set I found lots of analyses onli
 
 Python script: **machine-learning.py** 
 
-The code for performing LDA on the Iris data set was taken directly from the scikit-learn documentation referenced below. I left out the code to perform Principal Components Analysis and added some extra commands to allow me to figure out what was going on in the script. First I tried opening the csv file containing the data set via Pandas (as I have done in all scripts so far), but I ran into problems when trying to plot the results graph. In the end I decided to use the scikit-learn code as given and try to understand what it was doing. 
+The code for performing LDA on the Iris data set was taken directly from the **scikit-learn** documentation referenced below. I left out the code to perform Principal Components Analysis and added some extra commands to allow me to figure out what was going on in the script. First I tried opening the csv file containing the data set via Pandas (as I have done in all scripts so far), but I ran into problems when trying to plot the results graph. In the end I decided to use the **scikit-learn** code as given and try to understand what it was doing.
 
-![LDA from Iris 2cmpts](LDA_iris.jpeg)
+The Sebastian Raschka website (referenced below) is an excellent source of information on LDA and I relied heavily on it when trying to understand the various steps in the process. He explains what it is and performs LDA from scratch on the Iris data set as well as explaining the maths. He then illustrates how to do the same thing using **scikit-learn** in much fewer lines of code. Briefly, LDA is often used to project data onto a subspace that increases the separability between classes, while reducing the number of dimensions, before performing classification or machine learning. It is a supervised algorithim as it uses the known class labels to find linear discriminants which maximize the separation between classes - see the figure just below. An alternative way to separate classes would be to use feature selection; recall that the histograms of petal length and width are reasonably well separated for each Iris species, so LDA is probably unnecessary for this data set, but it works very well. 
 
 ![LDA from Sebastian Raschka](LDA_fromSRaschka.JPG)
 
+Explanation of some of the steps in this script:
+* LinearDiscriminantAnalysis is a way to perform discriminant analysis in **scikit-learn.** 
+* It takes an optional parameter n_components, which must be less than or equal to the number of classes.
+The Iris data set has three classes and n_components=2 here.
+* X is a 2D array (matrix) containing the observations. It's size is (150,4). Referred to as the _training data_.
+* y is a 1D array (vector) containing the class labels; in **scikit-learn** these are integers representing the species rather than the actual species names we have seen up to now with **Pandas.** It's size is (150,1)Referred to as the _target values_.
+* .fit(X, y) is a method of LinearDiscriminantAnalysis. It fits a LDA model given the training data and target values.
+* .transform(X) is a method of LinearDiscriminantAnalysis. It projects the data (X) to maximize class separation and returns a new array containing the transformed data. The new array has size (150,2), corresponding to  (number of observations, n_components).
 
+The ouput from this script looks like:
 
+![Output from machine-learning.py](machine-learning_OP.JPG)
+
+![LDA from Iris 2cmpts](LDA_iris.jpeg)
+
+From the plot we see that the first linear discriminant (LDA1) separates the classes very well; a projection onto the LDA1 axis has good separation between the classes but not so for projection onto the LDA2 axis. Therefore, it should be possible to perform LDA on the Iris data set with just one component and still achieve good class separation. Out of curiosity, I modified the code very slightly to do this by setting n_components=1 in LinearDiscriminantAnalysis. The output of transform(X) now has size (150,1), where 1 reflects the n_components value. In the plot below you can see that the classes are still very well separated.
+
+![LDA from Iris 1cmpts](LDA(1cmpt)_iris.jpeg)
 
 ## Conclusion <a name="conclusion"></a>
 
-The Iris data set is a classic multivariate data set containing 150 observations of four variables - sepal length, sepal width, petal length, and petal width - for three species of iris: setosa, versicolor, and virginica. There are 50 observations for each species (or class). With **get-data.py** I read in the data set and plotted the observations along with some descriptive statistics such as the mean and standard deviation. Using the script **stats-per-species.py** I began to look at how the three species behaved individually. I initially investigated the statistics per species by breaking the data set into three DataFrames, one for each species. As I learned more about Pandas, I realised that some of this could have been done using functions on the full data set, such as **Pandas groupby()**, which allows for selection of parts of a DataFrame by class label. In **class-separation.py** I wanted to investigate if it was possible to separate the species from each other based on histograms and a **Seaborn swarmplot** of the four variables; I concluded that it was possible, for some species and some variables. I then looked at relationships between the variables in **variable-relations.py**. The starting point here was a scatter matrix to see if any of the variables (when plotted against the others) seemed to form patterns. Based on the scatter matrix, where it looked as if some variables could be linearly related to each other, I chose some variables to investigate further. I performed linear regression visually with **Seaborn** and again with **statsmodels** in order to find the actual fitting parameters. I found that there is a very good linear correlation between PetalWidth and PetalLength for example. 
-
-see ref 36 for good explanation and better code to run.
+The Iris data set is a classic multivariate data set containing 150 observations of four variables - sepal length, sepal width, petal length, and petal width - for three species of iris: setosa, versicolor, and virginica. There are 50 observations for each species (or class). With **get-data.py** I read in the data set and plotted the observations along with some descriptive statistics such as the mean and standard deviation. Using the script **stats-per-species.py** I began to look at how the three species behaved individually. I initially investigated the statistics per species by breaking the data set into three DataFrames, one for each species. As I learned more about Pandas, I realised that some of this could have been done using functions on the full data set, such as **Pandas groupby()**, which allows for selection of parts of a DataFrame by class label. In **class-separation.py** I wanted to investigate if it was possible to separate the species from each other based on histograms and a **Seaborn swarmplot** of the four variables; I concluded that it was possible, for some species and some variables. I then looked at relationships between the variables in **variable-relations.py**. The starting point here was a scatter matrix to see if any of the variables (when plotted against the others) seemed to form patterns. Based on the scatter matrix, where it looked as if some variables could be linearly related to each other, I chose some variables to investigate further. I performed linear regression visually with **Seaborn** and again with **statsmodels** in order to find the actual fitting parameters. I found that there is a very good linear correlation between PetalWidth and PetalLength for example. Finally, I started doing a little bit of machine learning (or classification really) in the script **machine-learning.py** using **scikit-learn**. 
 
 ## List of Python scripts <a name="scripts"></a>
 * **iris.csv** Iris Data Set in same directory/repository
@@ -264,6 +278,7 @@ see ref 36 for good explanation and better code to run.
 * stats-per-species.py
 * class-separation.py
 * variable-relations.py
+* machine-learning.py
 
 ## References <a name="references"></a>
 1. Sir Ronald Fisher: https://www.britannica.com/biography/Ronald-Aylmer-Fisher 
@@ -302,3 +317,4 @@ see ref 36 for good explanation and better code to run.
 34. Machine learning tutorial: https://scikit-learn.org/stable/tutorial/basic/tutorial.html
 35. LDA using Iris data set: https://stackabuse.com/implementing-lda-in-python-with-scikit-learn/
 36. LDA on Iris via Python: http://sebastianraschka.com/Articles/2014_python_lda.html
+37. LDA on Iris in scikit-learn: https://scikit-learn.org/stable/auto_examples/decomposition/plot_pca_vs_lda.html#sphx-glr-auto-examples-decomposition-plot-pca-vs-lda-py
