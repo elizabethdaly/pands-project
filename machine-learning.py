@@ -44,7 +44,7 @@ print("target_names: ", target_names)
 
 lda = LinearDiscriminantAnalysis(n_components=2) 
 X_r2 = lda.fit(X, y).transform(X)
-print("LDA 2 has ", X_r2.ndim, "dimensions and shape ", X_r2.shape)
+print("LDA 2 components has ", X_r2.ndim, "dimensions and shape ", X_r2.shape)
 
 # ###########################################################
 plt.figure()
@@ -65,7 +65,7 @@ plt.show()
 
 lda1 = LinearDiscriminantAnalysis(n_components=1)
 X_r1 = lda1.fit(X, y).transform(X)
-print("LDA 1 has ", X_r1.ndim, "dimensions and shape ", X_r1.shape)
+print("LDA 1 component has ", X_r1.ndim, "dimensions and shape ", X_r1.shape)
 
 plt.figure()
 colors = ['blue', 'orange', 'green']
