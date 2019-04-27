@@ -31,6 +31,7 @@ print("Data column labels: ", col_labels)
 species = data.Name.unique()
 print("The three species are: ", species)
 
+# ###########################################################
 # Histogram of SepalLength for all species.
 # There's only one legend, so I have to get the 3 species names into it in legend handle.
 data.groupby('Name')['SepalLength'].hist(bins=10, alpha=0.5, stacked=True)
@@ -68,6 +69,7 @@ plt.legend((species), loc='best', fontsize=12)
 plt.savefig('Hist_PetalWidth.jpeg')
 plt.show()
 
+# ###########################################################
 # Plot all four histograms in one figure using subplot.
 # Edit legend for these small graphs.
 # Leave out some x and y axes titles to avoid crowding.
@@ -105,6 +107,7 @@ plt.tight_layout()
 plt.savefig('Hist_4attributes.jpeg')
 plt.show()
 
+# ###########################################################
 # Try Seaborn swarmplot as a cooler way to investigate species differences.
 
 # Slightly modified from https://seaborn.pydata.org/examples/

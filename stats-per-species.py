@@ -2,8 +2,8 @@
 # HDip Data Analytics 2019 pands-project
 # 
 # stats-per-species.py
-# Script to read in and analyse the iris data set / species
-#
+# Script to read in and analyse the iris data set / species.
+# Look at the statistics for each species.
 # ###########################################################
 
 # Import Pandas data analysis library.
@@ -83,12 +83,16 @@ plt.show()
 
 # ###########################################################
 # Can also look at some statistics per species using Pandas groupby()
-# Use rot keyword in plot() to align x-tick labels nicely.
+# on the full data set, i.e. no need to create seperate DataFrames for each species.
 
 # Mean
 print(data.groupby('Name')['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth'].mean())
 
+# Standard deviation
+print(data.groupby('Name')['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth'].std())
+
 # Bar chart of mean values for each species. 
+# Use rot keyword in plot() to align x-tick labels nicely.
 data.groupby('Name')['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth'].mean(). \
 plot(kind='bar',rot='horizontal')
 plt.title('Mean variable values', fontsize=18)
@@ -97,9 +101,6 @@ plt.grid()
 plt.legend(loc='best', fontsize=12)
 plt.savefig('Mean_species.jpeg')
 plt.show()
-
-# Standard deviation
-print(data.groupby('Name')['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth'].std())
 
 # Bar chart of std values for each species. 
 data.groupby('Name')['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth'].std(). \
@@ -118,7 +119,6 @@ plt.show()
 # There is a a line at the median. 
 # The whiskers extend from the box to show the range of the data. 
 # Outlying points are those past the end of the whiskers.
-# Place all 3 box plots in same figure using subplot() - too messy.
 
 # Setosa
 # plt.subplot(3,1,1)
