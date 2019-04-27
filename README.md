@@ -30,7 +30,7 @@ https://github.com/elizabethdaly/pands-project.git
     3. [Least squares fitting using statsmodels](#lsq)
 6. [Work done by other people on the Iris data set](#others)
     1. [Machine learning](#machinelearning)
-    2. [Example of LDA](#LDA)
+    2. [Example of Linear Discriminant Analysis](#LDA)
 7. [Conclusion](#conclusion)
 8. [List of Python scripts](#scripts)
 9. [References](#references)
